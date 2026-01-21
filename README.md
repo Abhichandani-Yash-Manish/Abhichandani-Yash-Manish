@@ -61,35 +61,6 @@ yash@mainframe:~$ ./contact.sh
 
 ---
 
-### 🧠 NEURAL NETWORK // SKILLS_TOPOLOGY
-
-```mermaid
-mindmap
-  root((Yash))
-    Frontend
-      React
-      Next.js
-      Tailwind
-      Three.js
-    Backend
-      Python
-      FastAPI
-      Node.js
-    Data
-      Supabase
-      PostgreSQL
-      Redis
-    DevOps
-      Docker
-      Git
-      Vercel
-    Tools
-      Figma
-      Photoshop
-```
-
----
-
 ### 🚀 EXECUTION_PROTOCOL // WORKFLOW
 
 ```mermaid
@@ -108,6 +79,35 @@ sequenceDiagram
 
 ---
 
+### � SYSTEM_MODULES // TECH_STACK
+
+<div align="center">
+
+| **Frontend (Interface)** | **Backend (Core)** | **DevOps (Deployment)** |
+|:---:|:---:|:---:|
+| <img src="https://skillicons.dev/icons?i=react,nextjs,ts,tailwind,figma,threejs&theme=dark" height="55" /> | <img src="https://skillicons.dev/icons?i=python,fastapi,supabase,postgres,nodejs,redis&theme=dark" height="55" /> | <img src="https://skillicons.dev/icons?i=git,github,vercel,docker,linux,bash&theme=dark" height="55" /> |
+
+</div>
+
+---
+
+### 📊 TELEMETRY_DATA // STATS_&_HEATMAP
+
+<div align="center">
+
+<img src="https://github-readme-stats.vercel.app/api?username=Abhichandani-Yash-Manish&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0D1117&title_color=00E5FF&icon_color=00E5FF&text_color=FFFFFF" height="150" />
+<img src="https://github-readme-streak-stats.herokuapp.com/?user=Abhichandani-Yash-Manish&theme=tokyonight&hide_border=true&background=0D1117&ring=00E5FF&fire=F97316&currStreakLabel=00E5FF&sideLabels=FFFFFF" height="150" />
+
+<br/>
+<br/>
+
+<!-- Contribution Graph (Heatmap) -->
+<img src="https://github-readme-activity-graph.vercel.app/graph?username=Abhichandani-Yash-Manish&bg_color=0D1117&color=00E5FF&line=00E5FF&point=F97316&area=true&area_color=00E5FF&hide_border=true" width="100%" />
+
+</div>
+
+---
+
 ### 📂 MISSION_LOGS // PROJECT_DATABASE
 
 | ID | Mission Name | Class | Status | Access |
@@ -117,15 +117,6 @@ sequenceDiagram
 | `003` | **Secret Project** | *R&D* | `CLASSIFIED` 🔴 | `[DENIED]` |
 
 ---
-
-### 📊 SYSTEM_LOAD // TELEMETRY
-
-<div align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=Abhichandani-Yash-Manish&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0D1117&title_color=00E5FF&icon_color=00E5FF&text_color=FFFFFF" height="150" />
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=Abhichandani-Yash-Manish&theme=tokyonight&hide_border=true&background=0D1117&ring=00E5FF&fire=F97316&currStreakLabel=00E5FF&sideLabels=FFFFFF" height="150" />
-</div>
-
-<br/>
 
 <div align="center">
   <code> END_OF_TRANSMISSION // 2026 </code>
