@@ -1,123 +1,110 @@
 <div align="center">
 
-<img src="https://raw.githubusercontent.com/Abhichandani-Yash-Manish/F1-Prefictor-Vibe_Project/main/public/developer_pixel_art.png" width="550" alt="Developer Pixel Art"/>
-
-<br/>
-
-<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=24&duration=3000&pause=1000&color=00E5FF&center=true&vCenter=true&width=600&lines=System.out.println(%22Hello+World%22);Initializing+Creative+Protocols...;Loading+Full-Stack+Modules...;Compiling+F1+Obsession..." alt="Typing SVG" /></a>
+<img src="https://readme-typing-svg.herokuapp.com?font=JetBrains+Mono&weight=700&size=30&duration=3000&pause=1000&color=00E5FF&center=true&vCenter=true&width=800&height=100&lines=System.out.println(%22Initializing+Telemetry...%22);Loading+Driver+Profile:+Yash+Abhichandani;Connecting+to+F1+Predictor+API...;Status:+READY_TO_RACE" alt="Typing SVG" />
 
 </div>
 
 <br/>
 
-## 👨‍💻 `User.profile`
+<table align="center" width="100%">
+  <tr>
+    <td width="60%" valign="top">
 
-```typescript
-const YashAbhichandani = {
-    role: "Full-Stack Developer",
-    location: "World Wide Web",
-    codebase: ["React", "Next.js", "Python", "FastAPI"],
-    passion: "Building digital experiences that feel magic ✨",
-    current_obsession: "Formula 1 🏎️ (Don't get me started on aerodynamics)",
-    status: "Shipping production-ready code",
-    coffee_level: "Critical ☕"
+### 🏎️ Driver Profile: `YashAbhichandani`
+
+> *System Status: 🟢 Online | Location: 🌐 World Wide Web*
+
+```javascript
+const driver_stats = {
+    role: "Full-Stack Engineer",
+    team: "Freelance / Open Source",
+    super_license: ["React", "Next.js", "Python", "FastAPI"],
+    current_season_goal: "Building the ultimate F1 platform",
+    driving_style: "Clean Code & High Performance"
 };
 ```
 
----
+**[ 📡 TRANSMISSION INCOMING ]**
+> "I build digital experiences that feel as fast as an F1 car. Currently optimizing the `F1-Predictor` for the 2026 season."
 
-## 🛠️ `System.Architecture`
+    </td>
+    <td width="40%" valign="top" align="center">
 
-<table>
-    <tr>
-        <td valign="top" width="33%">
-            <h3 align="center">Frontend_Core</h3>
-            <div align="center">
-                <img src="https://skillicons.dev/icons?i=react,nextjs,typescript,tailwind,figma&theme=dark" />
-            </div>
-            <p align="center"><i>"Pixel Perfect"</i></p>
-        </td>
-        <td valign="top" width="33%">
-            <h3 align="center">Backend_Engine</h3>
-            <div align="center">
-                <img src="https://skillicons.dev/icons?i=python,fastapi,supabase,postgresql,nodejs&theme=dark" />
-            </div>
-            <p align="center"><i>"High Performance"</i></p>
-        </td>
-        <td valign="top" width="33%">
-            <h3 align="center">DevOps_Terminal</h3>
-            <div align="center">
-                <img src="https://skillicons.dev/icons?i=git,github,vercel,docker,linux&theme=dark" />
-            </div>
-            <p align="center"><i>"CI/CD Pipeline"</i></p>
-        </td>
-    </tr>
+### 🏁 Grid Position
+
+<img src="https://github-readme-stats.vercel.app/api?username=Abhichandani-Yash-Manish&show_icons=true&theme=react&hide_border=true&bg_color=0D1117&title_color=00E5FF&icon_color=00E5FF&text_color=FFFFFF&rank_icon=github" width="100%" />
+
+    </td>
+  </tr>
 </table>
 
 ---
 
-## 📊 `Analytics.Dashboard`
+### 🔧 Power Unit Configuration (Tech Stack)
 
 <div align="center">
 
-<table>
-<tr>
-<td width="55%" valign="top">
+| **Aero (Frontend)** | **Engine (Backend)** | **Telemetry (DevOps)** |
+|:---:|:---:|:---:|
+| <img src="https://skillicons.dev/icons?i=react,nextjs,ts,tailwind,figma&theme=dark" height="50" /> | <img src="https://skillicons.dev/icons?i=python,fastapi,supabase,postgres,nodejs&theme=dark" height="50" /> | <img src="https://skillicons.dev/icons?i=git,github,vercel,docker,linux&theme=dark" height="50" /> |
 
-<img src="https://github-readme-stats.vercel.app/api?username=Abhichandani-Yash-Manish&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0D1117&title_color=00E5FF&icon_color=00E5FF&text_color=FFFFFF&rank_icon=github" width="100%" />
-<br/>
-<img src="https://github-readme-streak-stats.herokuapp.com/?user=Abhichandani-Yash-Manish&theme=tokyonight&hide_border=true&background=0D1117&ring=00E5FF&fire=F97316&currStreakLabel=00E5FF&sideLabels=FFFFFF" width="100%" />
+</div>
 
-</td>
-<td width="45%" valign="top">
+---
 
-### 🏆 The Obsession Project
+### 🏆 Grand Prix Highlights
 
+<table align="center" width="100%">
+  <tr>
+    <td width="50%" valign="top">
+      <h4 align="center">Current Flagship: F1 Predictor</h4>
+      <a href="https://apexpredict.live">
+        <img src="https://github-readme-stats.vercel.app/api/pin/?username=Abhichandani-Yash-Manish&repo=F1-Prefictor-Vibe_Project&theme=react&hide_border=true&bg_color=0D1117&title_color=00E5FF&icon_color=F97316" width="100%" />
+      </a>
+      <br/>
+      <div align="center">
+        <a href="https://apexpredict.live">
+          <img src="https://img.shields.io/badge/LIVE_TELEMETRY-apexpredict.live-00E5FF?style=for-the-badge&logo=vercel&logoColor=black" />
+        </a>
+      </div>
+    </td>
+    <td width="50%" valign="top">
+      <h4 align="center">Race Pace (Streak)</h4>
+      <img src="https://github-readme-streak-stats.herokuapp.com/?user=Abhichandani-Yash-Manish&theme=react&hide_border=true&background=0D1117&ring=00E5FF&fire=F97316&currStreakLabel=00E5FF&sideLabels=FFFFFF" width="100%" />
+    </td>
+  </tr>
+</table>
+
+---
+
+### 📊 Telemetry Data
+
+<div align="center">
+  <img src="https://github-readme-activity-graph.vercel.app/graph?username=Abhichandani-Yash-Manish&bg_color=0D1117&color=00E5FF&line=00E5FF&point=F97316&area=true&area_color=00E5FF&hide_border=true" width="100%" />
+</div>
+
+---
+
+### 📻 Team Radio (Connect)
+
+<div align="center">
+
+<a href="https://linkedin.com/in/yourprofile">
+  <img src="https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" />
+</a>
+&nbsp;
+<a href="mailto:yashraj2507@gmail.com">
+  <img src="https://img.shields.io/badge/Email-Send_Data-D14836?style=for-the-badge&logo=gmail&logoColor=white" />
+</a>
+&nbsp;
 <a href="https://apexpredict.live">
-  <img src="https://github-readme-stats.vercel.app/api/pin/?username=Abhichandani-Yash-Manish&repo=F1-Prefictor-Vibe_Project&theme=tokyonight&hide_border=true&bg_color=0D1117&title_color=00E5FF&icon_color=F97316" width="100%" />
+  <img src="https://img.shields.io/badge/Website-Visit_Paddock-00E5FF?style=for-the-badge&logo=google-chrome&logoColor=black" />
 </a>
 
-**F1 Apex** is where my engineering meets my passion.
-- **Stack**: Next.js 16, FastAPI, Supabase
-- **Scale**: 15k+ LOC, Real-time stats
-- **Vibe**: Telemetry-inspired UI
-
-[![Live Demo](https://img.shields.io/badge/�_SYSTEM_ONLINE-apexpredict.live-00E5FF?style=for-the-badge&logo=vercel&logoColor=black)](https://apexpredict.live)
-
-</td>
-</tr>
-</table>
-
-</div>
-
----
-
-## ⚡ `Git.Activity_Log`
-
-<div align="center">
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=Abhichandani-Yash-Manish&bg_color=0D1117&color=00E5FF&line=00E5FF&point=F97316&area=true&area_color=00E5FF&hide_border=true" width="95%" />
-</div>
-
----
-
-## � `Connect.Protocol`
-
-<div align="center">
-
-| Platform | Frequency | Status |
-|:---:|:---:|:---:|
-| <a href="https://linkedin.com/in/yourprofile"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=flat-square&logo=linkedin&logoColor=white" /></a> | High | `Connected` |
-| <a href="mailto:yashraj2507@gmail.com"><img src="https://img.shields.io/badge/Gmail-D14836?style=flat-square&logo=gmail&logoColor=white" /></a> | Always On | `Listening` |
-| <a href="https://apexpredict.live"><img src="https://img.shields.io/badge/Website-00E5FF?style=flat-square&logo=google-chrome&logoColor=black" /></a> | 24/7 | `Live` |
-
 </div>
 
 <br/>
 
 <div align="center">
-
-*"Code is like humor. When you have to explain it, it’s bad."*
-
-![Profile Views](https://komarev.com/ghpvc/?username=Abhichandani-Yash-Manish&color=00E5FF&style=flat-square&label=Traffic)
-
+  <img src="https://komarev.com/ghpvc/?username=Abhichandani-Yash-Manish&color=00E5FF&style=flat-square&label=Paddock+Visitors" />
 </div>
