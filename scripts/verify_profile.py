@@ -23,11 +23,12 @@ LOCAL_REFERENCE = re.compile(
 EXTERNAL_URL = re.compile(r"""https?://[^\s)>"']+""")
 
 REQUIRED_TEXT = (
-    "Decision ledger",
+    "Featured traces",
     "Turnout Lab",
     "GlobeTrotter",
-    "Capability, with receipts",
-    "OBSERVE → QUESTION → DECIDE → BUILD → VERIFY",
+    "Build circuit",
+    "Under the bodywork",
+    "I audit the assumption",
 )
 FORBIDDEN_PROVIDERS = (
     "github-readme-stats",
@@ -106,8 +107,8 @@ def main() -> int:
             errors.append(f"template-style external widget is forbidden: {provider}")
 
     references = sorted(local_references(text))
-    if not references:
-        errors.append("README contains no local visual assets")
+    if len(references) < 12:
+        errors.append(f"expected at least 12 local visual assets, found {len(references)}")
 
     for path in references:
         if not path.is_relative_to(ROOT):
@@ -124,6 +125,35 @@ def main() -> int:
                 continue
             if not root.tag.endswith("svg"):
                 errors.append(f"asset is not an SVG root: {path.relative_to(ROOT)}")
+
+    light_stems = {
+        path.name.removesuffix("-light.svg")
+        for path in references
+        if path.name.endswith("-light.svg")
+    }
+    dark_stems = {
+        path.name.removesuffix("-dark.svg")
+        for path in references
+        if path.name.endswith("-dark.svg")
+    }
+    if light_stems != dark_stems:
+        errors.append(
+            "light/dark asset pairs do not match: "
+            f"light-only={sorted(light_stems - dark_stems)}, "
+            f"dark-only={sorted(dark_stems - light_stems)}"
+        )
+
+    pictures = text.count("<picture>")
+    alt_matches = re.finditer(
+        r"""<img\b[^>]*\balt=(?P<quote>["'])(?P<alt>.*?)(?P=quote)""",
+        text,
+        re.IGNORECASE,
+    )
+    alt_texts = [match.group("alt") for match in alt_matches]
+    if pictures < 6:
+        errors.append(f"expected at least 6 visual panels, found {pictures}")
+    if len(alt_texts) != pictures or any(len(alt.strip()) < 20 for alt in alt_texts):
+        errors.append("every visual panel must have meaningful alternative text")
 
     urls = sorted({url.rstrip(".,") for url in EXTERNAL_URL.findall(text)})
     if len(urls) < 10:

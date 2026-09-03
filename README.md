@@ -1,122 +1,152 @@
 <div align="center">
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./assets/decision-trace-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="./assets/decision-trace-light.svg">
-  <img src="./assets/decision-trace-light.svg" width="100%" alt="Yash Abhichandani — engineering decisions into working systems">
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/hero-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./assets/hero-light.svg">
+  <img src="./assets/hero-light.svg" width="100%" alt="Yash Abhichandani engineering flight recorder: I audit the assumption, then I build the system. Observe, question, decide, build, verify.">
 </picture>
 
 <br>
 
-[Projects](https://github.com/Abhichandani-Yash-Manish?tab=repositories) · [GlobeTrotter live](https://globetrotter-vert-ten.vercel.app) · [LinkedIn](https://in.linkedin.com/in/yash-abhichandani-dev) · [Email](mailto:yashraj2507@gmail.com)
+[EXPLORE SYSTEMS](https://github.com/Abhichandani-Yash-Manish?tab=repositories) · [LAUNCH GLOBETROTTER](https://globetrotter-vert-ten.vercel.app) · [LINKEDIN](https://in.linkedin.com/in/yash-abhichandani-dev) · [EMAIL](mailto:yashraj2507@gmail.com)
 
 </div>
 
-I am most interested in the moment when a project stops being a demo and starts having consequences: a leaked split can lie, an access rule can expose data, and a planner can lose someone's work. **That is the part I like engineering.**
+I am **Yash**, a Computer Engineering student at Dharmsinh Desai University and Data Science student at IIT Madras. I like the moment when a project stops being a demo and starts having consequences—a leaked split can lie, an access rule can expose data, and a planner can lose someone's work.
 
-I study Computer Engineering at Dharmsinh Desai University and Data Science at IIT Madras. My work moves between applied machine learning and full-stack product systems, but the method stays consistent:
+**That is the part I like engineering.**
 
-> **Observe the signal. Question the convenient answer. Make the decision explicit. Build it. Verify the real journey.**
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/operating-system-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./assets/operating-system-light.svg">
+  <img src="./assets/operating-system-light.svg" width="100%" alt="Four engineering principles: data before model, contracts before screens, fallbacks before demos, evidence before claims.">
+</picture>
 
-## Decision ledger
+## Featured traces
 
-### Turnout Lab — when the benchmark was the bug
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/turnout-trace-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./assets/turnout-trace-light.svg">
+  <img src="./assets/turnout-trace-light.svg" width="100%" alt="Turnout Lab case file: 100 of 100 test records overlapped training. The response was quarantine, grouped out-of-fold validation and calibration across 25 outer folds. Recorded ROC-AUC 0.635 and Brier score 0.221.">
+</picture>
 
-<sub>APPLIED ML · DATA INTEGRITY · DECISION SUPPORT</sub>
+<div align="center">
 
-The obvious task was to train an attendance classifier. The important discovery was that **all 100 official test records also appeared in the training data** by student identity and normalized feature fingerprint. A conventional score could look perfect while measuring memorization.
+**[OPEN THE CASE FILE →](https://github.com/Abhichandani-Yash-Manish/turnout-lab)** &nbsp;&nbsp; [Evaluation](https://github.com/Abhichandani-Yash-Manish/turnout-lab#model-comparison-and-selection) · [Data audit](https://github.com/Abhichandani-Yash-Manish/turnout-lab#data-quality-audit) · [Model card](https://github.com/Abhichandani-Yash-Manish/turnout-lab#model-card-and-responsible-use)
 
-- **Signal —** the official split produced suspiciously easy matching records.
-- **Decision —** quarantine every test-linked identity and fingerprint before evaluation.
-- **Build —** group-safe nested validation, fold-local preprocessing, sigmoid calibration, risk bands, batch scoring, and an operational Streamlit dashboard.
-- **Proof —** 25 outer validation folds, machine-readable audit artifacts, an executed notebook, deterministic tests, and an explicit separation between evaluation and final prediction refit.
-
-The result is deliberately honest: a calibrated random forest with modest signal, not a manufactured perfect score. The repository documents the trade-offs, limitations, privacy boundary, and prohibited punitive use.
-
-**[Inspect the repository →](https://github.com/Abhichandani-Yash-Manish/turnout-lab)** &nbsp; **[Read the evaluation →](https://github.com/Abhichandani-Yash-Manish/turnout-lab#model-comparison-and-selection)**
-
----
-
-### GlobeTrotter — a travel product that survives the demo
-
-<sub>FULL-STACK PRODUCT · RELATIONAL WORKFLOWS · RESILIENT DEMO</sub>
-
-GlobeTrotter turns a multi-city idea into a dated, costed itinerary that can be edited with collaborators, checked for planning conflicts, published, and copied into an independent trip.
-
-- **Constraint —** keep the complete judged journey demonstrable without paid services or required API keys.
-- **Decision —** use a durable relational model, seeded editorial data, keyless maps, persisted-coordinate route fallbacks, and clearly dated offline currency references.
-- **Build —** role-aware collaboration, invitation tokens, 55 destination dossiers, 390 city-specific activities, budget controls, trip-health checks, multilingual navigation, and transactional trip copying.
-- **Proof —** public demo journeys, desktop and mobile screenshots, database migrations, clean-data gates, access-control tests, deployment documentation, and a persistent Turso production path.
-
-**[Open the live workspace →](https://globetrotter-vert-ten.vercel.app)** &nbsp; **[Inspect the repository →](https://github.com/Abhichandani-Yash-Manish/GlobeTrotter)**
-
-## Selected systems
-
-These are not interchangeable “project cards.” Each one explores a different system boundary.
-
-- **PharmaGuard Gujarat —** FEFO pharmacy workflows, expiry visibility, demand forecasting, and inventory accountability. [Source](https://github.com/Abhichandani-Yash-Manish/Void-Pointers-Aetrix-2026-)
-- **PRISM IEMS —** role-based institutional operations and agent-assisted education workflows. [Live](https://prism-iems.vercel.app) · [Source](https://github.com/Abhichandani-Yash-Manish/prism-iems)
-- **BEOS+ —** emergency blood coordination across donors, hospitals, and blood banks. [Live](https://beos-plus.vercel.app) · [Source](https://github.com/Abhichandani-Yash-Manish/BEOS_PLUS)
-- **F1 Apex —** deadline-aware motorsport predictions, leagues, scoring, and telemetry-oriented interfaces. [Live](https://apexpredict.live) · [Source](https://github.com/Abhichandani-Yash-Manish/F1-Prefictor-Vibe_Project)
-- **Cosmic Lens —** scientific-data storytelling for high-redshift anomaly exploration in a team build. [Live](https://cosmiclens-iota.vercel.app) · [Source](https://github.com/Abhichandani-Yash-Manish/Cosmic-Lens-by-Team-Void_Pointers)
-
-## Capability, with receipts
-
-I prefer linking a capability to evidence instead of displaying a wall of logos.
-
-- **Data before model.** Audit provenance, leakage, missingness, duplicates, and evaluation validity before optimizing a metric. [Turnout Lab audit](https://github.com/Abhichandani-Yash-Manish/turnout-lab#data-quality-audit)
-- **Contracts before screens.** Define roles, state transitions, validation, persistence, and failure behavior before polishing the interface. [GlobeTrotter architecture](https://github.com/Abhichandani-Yash-Manish/GlobeTrotter#architecture)
-- **Fallbacks before demos.** Make the core journey survive absent API keys, stale providers, refreshes, and clean installations. [GlobeTrotter verification](https://github.com/Abhichandani-Yash-Manish/GlobeTrotter#verification)
-- **Uncertainty before certainty.** Separate a probability from reliability, show limitations, and avoid causal claims the data cannot support. [Turnout Lab model card](https://github.com/Abhichandani-Yash-Manish/turnout-lab#model-card-and-responsible-use)
-- **Proof before claims.** Prefer runnable paths, screenshots, tests, artifacts, and explicit exclusions over feature-list theatre. [Repositories](https://github.com/Abhichandani-Yash-Manish?tab=repositories)
+</div>
 
 <details>
-<summary><strong>The tools behind the work</strong></summary>
+<summary><strong>Why this decision matters</strong></summary>
 
 <br>
 
-I reach for the tool that fits the boundary:
+The obvious task was to train an attendance classifier. The important discovery was that every official test record also appeared in training by student identity and normalized feature fingerprint. A conventional model could appear perfect while measuring memorization.
 
-- **Product systems:** TypeScript, React, Next.js, relational data models, Supabase, Prisma, Turso, and Firebase.
-- **APIs and workflows:** Python, FastAPI, Flask, LangGraph, background jobs, validation, and event-driven updates.
-- **Applied ML:** pandas, scikit-learn, grouped validation, calibration, feature pipelines, diagnostics, and Streamlit.
-- **Delivery:** Git, CI checks, Vercel, Docker, reproducible environments, seeded demos, and browser-level verification.
+- **Decision:** quarantine every test-linked identity and fingerprint before evaluation.
+- **Build:** group-safe nested validation, fold-local preprocessing, sigmoid calibration, risk bands, batch scoring, and an operational Streamlit dashboard.
+- **Proof:** 25 outer validation folds, machine-readable audit artifacts, an executed notebook, deterministic tests, and a hard separation between evaluation and prediction refit.
 
-This list is intentionally secondary. The decision ledger above is the evidence.
+The shipped result is deliberately honest: a calibrated random forest with modest signal, documented uncertainty, privacy boundaries, and prohibited punitive use.
 
 </details>
 
-## How I work with teams
+<br>
 
-Hackathons taught me to move quickly. The harder lesson was learning what must remain after the deadline: a repository someone else can run, an architecture someone else can explain, and limitations a reviewer does not have to discover by accident.
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/globetrotter-trace-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./assets/globetrotter-trace-light.svg">
+  <img src="./assets/globetrotter-trace-light.svg" width="100%" alt="GlobeTrotter product trace: idea to plan, collaborate, publish and copy. The persistent workspace contains 55 destination dossiers, 390 activities, three navigation languages and no required paid API keys.">
+</picture>
 
-I am happiest in teams that:
+<div align="center">
 
-- turn broad ideas into small, testable system boundaries;
-- make ownership and handoffs explicit;
-- keep the main journey runnable while features evolve;
-- document why a decision was made, not only what was installed;
-- treat the demo as the beginning of scrutiny, not the end of engineering.
+**[LAUNCH THE WORKSPACE →](https://globetrotter-vert-ten.vercel.app)** &nbsp;&nbsp; [Source](https://github.com/Abhichandani-Yash-Manish/GlobeTrotter) · [Architecture](https://github.com/Abhichandani-Yash-Manish/GlobeTrotter#architecture) · [Verification](https://github.com/Abhichandani-Yash-Manish/GlobeTrotter#verification)
 
-## Current signal
+</div>
 
-Right now I am deepening three connected skills:
+<details>
+<summary><strong>Why this system survives the demo</strong></summary>
 
-- leakage-safe and decision-aware machine learning;
-- agent workflows with observable state and controlled side effects;
-- full-stack products whose important journeys remain reproducible.
+<br>
 
-If you are building something in that territory—or want to turn an ambitious idea into a system people can actually inspect—let's talk.
+The product turns a multi-city idea into a dated, costed itinerary that can be edited with collaborators, checked for planning conflicts, published, and copied into an independent trip.
+
+- **Constraint:** keep the judged journey demonstrable without paid services or required API keys.
+- **Decision:** use a durable relational model, seeded editorial data, keyless maps, persisted-coordinate route fallbacks, and clearly dated offline currency references.
+- **Build:** role-aware collaboration, invitation tokens, 55 destination dossiers, 390 city-specific activities, budget controls, trip-health checks, multilingual navigation, and transactional trip copying.
+- **Proof:** public demo journeys, desktop and mobile screenshots, migrations, clean-data gates, access-control tests, deployment documentation, and a persistent Turso production path.
+
+</details>
+
+## Build circuit
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/build-circuit-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./assets/build-circuit-light.svg">
+  <img src="./assets/build-circuit-light.svg" width="100%" alt="Yash's build circuit connecting Turnout Lab for machine-learning integrity, GlobeTrotter for product systems, PRISM IEMS for agent workflows, PharmaGuard and BEOS Plus for public-impact systems, and F1 Apex for motorsport product engineering.">
+</picture>
+
+<div align="center">
+
+[**TURNOUT LAB**](https://github.com/Abhichandani-Yash-Manish/turnout-lab) · [**GLOBETROTTER**](https://github.com/Abhichandani-Yash-Manish/GlobeTrotter) · [**PRISM IEMS**](https://github.com/Abhichandani-Yash-Manish/prism-iems) · [**PHARMAGUARD**](https://github.com/Abhichandani-Yash-Manish/Void-Pointers-Aetrix-2026-) · [**BEOS+**](https://beos-plus.vercel.app) · [**F1 APEX**](https://apexpredict.live) · [**COSMIC LENS**](https://cosmiclens-iota.vercel.app)
+
+</div>
+
+Each system probes a different failure mode:
+
+- **Machine-learning integrity** — leakage, calibration, grouped evaluation, and decision thresholds.
+- **Product systems** — persistence, authorization, collaborative state, resilient data, and real user journeys.
+- **Agent workflows** — observable state, validation, controlled tools, and side-effect boundaries.
+- **Public-impact systems** — pharmacy inventory and blood-emergency coordination.
+- **Motorsport products** — deadline-aware predictions, competition, scoring, and telemetry-oriented interfaces.
+
+## Under the bodywork
+
+<details>
+<summary><strong>Capability map — tools connected to the work</strong></summary>
+
+<br>
+
+- **Product systems:** TypeScript, React, Next.js, relational data models, Supabase, Prisma, Turso, and Firebase.
+- **APIs and workflows:** Python, FastAPI, Flask, LangGraph, validation, background tasks, and event-driven updates.
+- **Applied ML:** pandas, scikit-learn, grouped validation, calibration, feature pipelines, diagnostics, and Streamlit.
+- **Delivery:** Git, CI, Vercel, Docker, reproducible environments, seeded demonstrations, and browser-level verification.
+
+No skill percentages: follow the repositories, tests, artifacts, and live journeys instead.
+
+</details>
+
+<details>
+<summary><strong>Team protocol — what I try to leave behind</strong></summary>
+
+<br>
+
+Hackathons taught me to move quickly. The harder lesson was learning what must remain after the deadline:
+
+- a repository someone else can run;
+- an architecture someone else can explain;
+- explicit ownership and handoffs;
+- a main journey that stays runnable while features evolve;
+- limitations a reviewer does not have to discover by accident.
+
+I enjoy teams that turn ambitious ideas into small, testable system boundaries and treat the demo as the beginning of scrutiny—not the end of engineering.
+
+</details>
+
+<br>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/open-channel-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./assets/open-channel-light.svg">
+  <img src="./assets/open-channel-light.svg" width="100%" alt="Open collaboration channel: bring the ambitious idea; I will bring the system questions.">
+</picture>
 
 <div align="center">
 
 **Yash Abhichandani**<br>
 Gujarat, India · Computer Engineering × Data Science
 
-[Email](mailto:yashraj2507@gmail.com) · [LinkedIn](https://in.linkedin.com/in/yash-abhichandani-dev) · [All repositories](https://github.com/Abhichandani-Yash-Manish?tab=repositories)
-
-<br>
-
-<sub>OBSERVE → QUESTION → DECIDE → BUILD → VERIFY</sub>
+[EMAIL](mailto:yashraj2507@gmail.com) · [LINKEDIN](https://in.linkedin.com/in/yash-abhichandani-dev) · [GITHUB](https://github.com/Abhichandani-Yash-Manish?tab=repositories)
 
 </div>

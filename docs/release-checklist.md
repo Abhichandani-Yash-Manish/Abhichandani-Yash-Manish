@@ -3,7 +3,8 @@
 ## Repository
 
 - [ ] \`python3 scripts/verify_profile.py\` passes.
-- [ ] Both SVG variants render and contain the same information.
+- [ ] `python3 scripts/build_visuals.py` produces no asset diff.
+- [ ] All six visual panels render in both light and dark mode and contain equivalent information.
 - [ ] The README has no unsupported project claims.
 - [ ] Every flagship link opens in a signed-out browser.
 - [ ] The profile is checked in GitHub light and dark mode.

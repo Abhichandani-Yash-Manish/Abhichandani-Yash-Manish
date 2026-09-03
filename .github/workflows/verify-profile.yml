@@ -17,5 +17,9 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Rebuild visual system
+        run: |
+          python scripts/build_visuals.py
+          git diff --exit-code -- assets
       - name: Verify README and local assets
         run: python scripts/verify_profile.py
