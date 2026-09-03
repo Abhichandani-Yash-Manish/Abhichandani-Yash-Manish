@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" role="img" aria-labelledby="title desc">
+  <title id="title">Yash Abhichandani — Decision Trace</title>
+  <desc id="desc">Engineering decisions into working systems. Observe, question, decide, build, verify.</desc>
+  <defs>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#d8e5ec" stroke-width="1"/>
+    </pattern>
+    <style>
+      .display { font-family: "Arial Narrow", "Avenir Next Condensed", "Roboto Condensed", sans-serif; font-weight: 800; letter-spacing: -2px; }
+      .body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: 1.6px; }
+      .trace { stroke-dasharray: 1220; stroke-dashoffset: 0; animation: reveal 1.5s cubic-bezier(.2,.75,.25,1) .15s both; }
+      .node { opacity: 1; animation: arrive .25s ease-out both; }
+      .n1 { animation-delay: .35s; } .n2 { animation-delay: .62s; } .n3 { animation-delay: .88s; }
+      .n4 { animation-delay: 1.12s; } .n5 { animation-delay: 1.38s; }
+      @keyframes reveal { from { stroke-dashoffset: 1220; } to { stroke-dashoffset: 0; } }
+      @keyframes arrive { from { opacity: 0; } to { opacity: 1; } }
+      @media (prefers-reduced-motion: reduce) {
+        .trace { animation: none; stroke-dashoffset: 0; }
+        .node { animation: none; opacity: 1; }
+      }
+    </style>
+  </defs>
+
+  <rect width="1200" height="420" rx="30" fill="#f3f7fa"/>
+  <rect x="18" y="18" width="1164" height="384" rx="20" fill="url(#grid)" opacity=".7"/>
+  <rect x="18.5" y="18.5" width="1163" height="383" rx="20" fill="none" stroke="#c7d8e2"/>
+
+  <path d="M48 58H60V106H48" fill="none" stroke="#ff705d" stroke-width="6"/>
+  <text x="78" y="62" class="mono" font-size="13" font-weight="700" fill="#2d6cdf">PROFILE / DECISION RECORDER</text>
+  <text x="1128" y="62" class="mono" font-size="12" text-anchor="end" fill="#607484">YAM · TRACE 01</text>
+
+  <text x="72" y="151" class="display" font-size="70" fill="#10243c">YASH ABHICHANDANI</text>
+  <text x="75" y="197" class="body" font-size="29" font-weight="650" fill="#29445c">Engineering decisions into working systems.</text>
+  <text x="76" y="234" class="mono" font-size="12" font-weight="700" fill="#607484">COMPUTER ENGINEERING × DATA SCIENCE  /  GUJARAT, INDIA</text>
+
+  <path d="M72 316H222L258 282H420L460 327H627L672 268H836L884 309H1125" fill="none" stroke="#cbdbe4" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <path class="trace" d="M72 316H222L258 282H420L460 327H627L672 268H836L884 309H1125" fill="none" stroke="#2d6cdf" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <g class="node n1">
+    <circle cx="112" cy="316" r="9" fill="#f3f7fa" stroke="#2d6cdf" stroke-width="4"/>
+    <text x="112" y="365" class="mono" font-size="12" font-weight="750" text-anchor="middle" fill="#29445c">OBSERVE</text>
+  </g>
+  <g class="node n2">
+    <circle cx="302" cy="282" r="9" fill="#f3f7fa" stroke="#2d6cdf" stroke-width="4"/>
+    <text x="302" y="365" class="mono" font-size="12" font-weight="750" text-anchor="middle" fill="#29445c">QUESTION</text>
+  </g>
+  <g class="node n3">
+    <circle cx="538" cy="327" r="10" fill="#ff705d" stroke="#f3f7fa" stroke-width="4"/>
+    <text x="538" y="365" class="mono" font-size="12" font-weight="800" text-anchor="middle" fill="#b73a2b">DECIDE</text>
+  </g>
+  <g class="node n4">
+    <circle cx="746" cy="268" r="9" fill="#f3f7fa" stroke="#2d6cdf" stroke-width="4"/>
+    <text x="746" y="365" class="mono" font-size="12" font-weight="750" text-anchor="middle" fill="#29445c">BUILD</text>
+  </g>
+  <g class="node n5">
+    <circle cx="1014" cy="309" r="10" fill="#178f7f" stroke="#f3f7fa" stroke-width="4"/>
+    <text x="1014" y="365" class="mono" font-size="12" font-weight="800" text-anchor="middle" fill="#087367">VERIFY</text>
+  </g>
+
+  <text x="1128" y="390" class="mono" font-size="10" text-anchor="end" fill="#778995">THE DECISION IS PART OF THE DELIVERABLE</text>
+</svg>
