@@ -26,12 +26,10 @@ I study Computer Engineering at Dharmsinh Desai University and Data Science at I
 
 The obvious task was to train an attendance classifier. The important discovery was that **all 100 official test records also appeared in the training data** by student identity and normalized feature fingerprint. A conventional score could look perfect while measuring memorization.
 
-| The trace | What happened |
-|:--|:--|
-| **Signal** | The official split produced suspiciously easy matching records. |
-| **Decision** | Quarantine every test-linked identity and fingerprint before evaluation. |
-| **Build** | Group-safe nested validation, fold-local preprocessing, sigmoid calibration, risk bands, batch scoring, and an operational Streamlit dashboard. |
-| **Proof** | 25 outer validation folds, machine-readable audit artifacts, an executed notebook, deterministic tests, and an explicit separation between evaluation and final prediction refit. |
+- **Signal —** the official split produced suspiciously easy matching records.
+- **Decision —** quarantine every test-linked identity and fingerprint before evaluation.
+- **Build —** group-safe nested validation, fold-local preprocessing, sigmoid calibration, risk bands, batch scoring, and an operational Streamlit dashboard.
+- **Proof —** 25 outer validation folds, machine-readable audit artifacts, an executed notebook, deterministic tests, and an explicit separation between evaluation and final prediction refit.
 
 The result is deliberately honest: a calibrated random forest with modest signal, not a manufactured perfect score. The repository documents the trade-offs, limitations, privacy boundary, and prohibited punitive use.
 
@@ -45,12 +43,10 @@ The result is deliberately honest: a calibrated random forest with modest signal
 
 GlobeTrotter turns a multi-city idea into a dated, costed itinerary that can be edited with collaborators, checked for planning conflicts, published, and copied into an independent trip.
 
-| The trace | What happened |
-|:--|:--|
-| **Constraint** | Keep the complete judged journey demonstrable without paid services or required API keys. |
-| **Decision** | Use a durable relational model, seeded editorial data, keyless maps, persisted-coordinate route fallbacks, and clearly dated offline currency references. |
-| **Build** | Role-aware collaboration, invitation tokens, 55 destination dossiers, 390 city-specific activities, budget controls, trip-health checks, multilingual navigation, and transactional trip copying. |
-| **Proof** | Public demo journeys, desktop and mobile screenshots, database migrations, clean-data gates, access-control tests, deployment documentation, and a persistent Turso production path. |
+- **Constraint —** keep the complete judged journey demonstrable without paid services or required API keys.
+- **Decision —** use a durable relational model, seeded editorial data, keyless maps, persisted-coordinate route fallbacks, and clearly dated offline currency references.
+- **Build —** role-aware collaboration, invitation tokens, 55 destination dossiers, 390 city-specific activities, budget controls, trip-health checks, multilingual navigation, and transactional trip copying.
+- **Proof —** public demo journeys, desktop and mobile screenshots, database migrations, clean-data gates, access-control tests, deployment documentation, and a persistent Turso production path.
 
 **[Open the live workspace →](https://globetrotter-vert-ten.vercel.app)** &nbsp; **[Inspect the repository →](https://github.com/Abhichandani-Yash-Manish/GlobeTrotter)**
 
@@ -58,25 +54,21 @@ GlobeTrotter turns a multi-city idea into a dated, costed itinerary that can be 
 
 These are not interchangeable “project cards.” Each one explores a different system boundary.
 
-| System | Boundary explored | Open |
-|:--|:--|:--|
-| **PharmaGuard Gujarat** | FEFO pharmacy workflows, expiry visibility, demand forecasting, and inventory accountability | [Source](https://github.com/Abhichandani-Yash-Manish/Void-Pointers-Aetrix-2026-) |
-| **PRISM IEMS** | Role-based institutional operations and agent-assisted education workflows | [Live](https://prism-iems.vercel.app) · [Source](https://github.com/Abhichandani-Yash-Manish/prism-iems) |
-| **BEOS+** | Emergency blood coordination across donors, hospitals, and blood banks | [Live](https://beos-plus.vercel.app) · [Source](https://github.com/Abhichandani-Yash-Manish/BEOS_PLUS) |
-| **F1 Apex** | Deadline-aware motorsport predictions, leagues, scoring, and telemetry-oriented interfaces | [Live](https://apexpredict.live) · [Source](https://github.com/Abhichandani-Yash-Manish/F1-Prefictor-Vibe_Project) |
-| **Cosmic Lens** | Scientific-data storytelling for high-redshift anomaly exploration in a team build | [Live](https://cosmiclens-iota.vercel.app) · [Source](https://github.com/Abhichandani-Yash-Manish/Cosmic-Lens-by-Team-Void_Pointers) |
+- **PharmaGuard Gujarat —** FEFO pharmacy workflows, expiry visibility, demand forecasting, and inventory accountability. [Source](https://github.com/Abhichandani-Yash-Manish/Void-Pointers-Aetrix-2026-)
+- **PRISM IEMS —** role-based institutional operations and agent-assisted education workflows. [Live](https://prism-iems.vercel.app) · [Source](https://github.com/Abhichandani-Yash-Manish/prism-iems)
+- **BEOS+ —** emergency blood coordination across donors, hospitals, and blood banks. [Live](https://beos-plus.vercel.app) · [Source](https://github.com/Abhichandani-Yash-Manish/BEOS_PLUS)
+- **F1 Apex —** deadline-aware motorsport predictions, leagues, scoring, and telemetry-oriented interfaces. [Live](https://apexpredict.live) · [Source](https://github.com/Abhichandani-Yash-Manish/F1-Prefictor-Vibe_Project)
+- **Cosmic Lens —** scientific-data storytelling for high-redshift anomaly exploration in a team build. [Live](https://cosmiclens-iota.vercel.app) · [Source](https://github.com/Abhichandani-Yash-Manish/Cosmic-Lens-by-Team-Void_Pointers)
 
 ## Capability, with receipts
 
 I prefer linking a capability to evidence instead of displaying a wall of logos.
 
-| Practice | What it means in my work | Evidence |
-|:--|:--|:--|
-| **Data before model** | Audit provenance, leakage, missingness, duplicates, and evaluation validity before optimizing a metric. | [Turnout Lab audit](https://github.com/Abhichandani-Yash-Manish/turnout-lab#data-quality-audit) |
-| **Contracts before screens** | Define roles, state transitions, validation, persistence, and failure behavior before polishing the interface. | [GlobeTrotter architecture](https://github.com/Abhichandani-Yash-Manish/GlobeTrotter#architecture) |
-| **Fallbacks before demos** | Make the core journey survive absent API keys, stale providers, refreshes, and clean installations. | [GlobeTrotter verification](https://github.com/Abhichandani-Yash-Manish/GlobeTrotter#verification) |
-| **Uncertainty before certainty** | Separate a probability from reliability, show limitations, and avoid causal claims the data cannot support. | [Turnout Lab model card](https://github.com/Abhichandani-Yash-Manish/turnout-lab#model-card-and-responsible-use) |
-| **Proof before claims** | Prefer runnable paths, screenshots, tests, artifacts, and explicit exclusions over feature-list theatre. | [Repositories](https://github.com/Abhichandani-Yash-Manish?tab=repositories) |
+- **Data before model.** Audit provenance, leakage, missingness, duplicates, and evaluation validity before optimizing a metric. [Turnout Lab audit](https://github.com/Abhichandani-Yash-Manish/turnout-lab#data-quality-audit)
+- **Contracts before screens.** Define roles, state transitions, validation, persistence, and failure behavior before polishing the interface. [GlobeTrotter architecture](https://github.com/Abhichandani-Yash-Manish/GlobeTrotter#architecture)
+- **Fallbacks before demos.** Make the core journey survive absent API keys, stale providers, refreshes, and clean installations. [GlobeTrotter verification](https://github.com/Abhichandani-Yash-Manish/GlobeTrotter#verification)
+- **Uncertainty before certainty.** Separate a probability from reliability, show limitations, and avoid causal claims the data cannot support. [Turnout Lab model card](https://github.com/Abhichandani-Yash-Manish/turnout-lab#model-card-and-responsible-use)
+- **Proof before claims.** Prefer runnable paths, screenshots, tests, artifacts, and explicit exclusions over feature-list theatre. [Repositories](https://github.com/Abhichandani-Yash-Manish?tab=repositories)
 
 <details>
 <summary><strong>The tools behind the work</strong></summary>
