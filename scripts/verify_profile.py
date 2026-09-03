@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the local integrity and deliberate constraints of the profile README."""
+"""Validate the profile's structure, media budget, and public evidence links."""
 
 from __future__ import annotations
 
@@ -16,27 +16,30 @@ from urllib.parse import unquote, urlparse
 
 ROOT = Path(__file__).resolve().parents[1]
 README = ROOT / "README.md"
-LOCAL_REFERENCE = re.compile(
-    r"""(?:src|srcset|href)=["'](?P<html>\.?\.?/[^"'#?]+|\.?[^:"']+\.(?:svg|png|jpg|jpeg|webp))["']"""
-    r"""|\[[^\]]*\]\((?P<markdown>\.?\.?/[^)#?]+)\)""",
+ASSETS = ROOT / "assets"
+EXTERNAL_URL = re.compile(r"""https?://[^\s)>\"']+""")
+HTML_LOCAL_ASSET = re.compile(
+    r"""(?:src|srcset)=[\"'](?P<path>\.?\.?/[^\"'#?]+)[\"']""",
     re.IGNORECASE,
 )
-EXTERNAL_URL = re.compile(r"""https?://[^\s)>"']+""")
 
 REQUIRED_TEXT = (
-    "lights out",
-    "i refuse to ship blind",
-    "the perfect score was a red flag",
-    "the demo does not break when the api does",
+    "01 / initialize",
+    "02 / featured builds",
+    "03 / engineering telemetry",
+    "04 / garage",
+    "05 / team flight log",
+    "06 / open channel",
+    "i am happiest when the clock is running",
+    "all 100 official test records overlapped training",
+    "f1 apex",
     "turnout lab",
     "globetrotter",
-    "f1 apex",
     "prism iems",
-    "cosmic lens",
     "pharmaguard",
     "beos+",
-    "pit crew",
-    "team radio",
+    "cosmic lens",
+    "apex simulate",
 )
 FORBIDDEN_PROVIDERS = (
     "github-readme-stats",
@@ -46,37 +49,99 @@ FORBIDDEN_PROVIDERS = (
     "platane/snk",
 )
 NETWORK_SKIP_HOSTS = {"linkedin.com", "www.linkedin.com", "in.linkedin.com"}
-EXPECTED_SVGS = {
-    "hero.svg",
-    "race-strategy.svg",
-    "sector-turnout.svg",
-    "sector-globetrotter.svg",
-    "paddock.svg",
-    "pit-crew.svg",
-    "team-radio.svg",
+
+EXPECTED_ASSETS = {
+    "editorial-race-hero.svg",
+    "previews/f1-apex-loop.gif",
+    "previews/f1-apex-static.png",
+    "previews/globetrotter-loop.gif",
+    "previews/globetrotter-static.png",
+    "previews/turnout-lab.png",
+    "previews/prism-iems.png",
 }
-EXPECTED_SCREENSHOTS = {
-    "showcase/turnout-lab.png",
-    "showcase/globetrotter.png",
-    "showcase/f1-apex.png",
-    "showcase/prism-iems.png",
-    "showcase/cosmic-lens.png",
+EXPECTED_GIFS = {
+    "previews/f1-apex-loop.gif",
+    "previews/globetrotter-loop.gif",
 }
+EXPECTED_PNG_SIZE = {
+    "previews/f1-apex-static.png": (960, 540),
+    "previews/globetrotter-static.png": (960, 540),
+    "previews/turnout-lab.png": (1440, 900),
+    "previews/prism-iems.png": (2940, 1668),
+}
+MAX_GIF_BYTES = 2_500_000
+MAX_MEDIA_BYTES = 8_000_000
 
 
 def fail(message: str) -> None:
     print(f"FAIL: {message}")
 
 
-def local_references(text: str) -> set[Path]:
+def referenced_assets(text: str) -> set[Path]:
     found: set[Path] = set()
-    for match in LOCAL_REFERENCE.finditer(text):
-        raw = match.group("html") or match.group("markdown")
-        if not raw or raw.startswith(("http://", "https://", "mailto:")):
-            continue
-        cleaned = unquote(raw).split("#", 1)[0].split("?", 1)[0]
-        found.add((ROOT / cleaned).resolve())
+    for match in HTML_LOCAL_ASSET.finditer(text):
+        raw = unquote(match.group("path"))
+        found.add((ROOT / raw).resolve())
     return found
+
+
+def png_size(path: Path) -> tuple[int, int]:
+    with path.open("rb") as image_file:
+        header = image_file.read(24)
+    if len(header) < 24 or header[:8] != b"\x89PNG\r\n\x1a\n":
+        raise ValueError("invalid PNG header")
+    return struct.unpack(">II", header[16:24])
+
+
+def gif_info(path: Path) -> tuple[int, int, int]:
+    """Return logical width, height, and image-frame count without dependencies."""
+
+    data = path.read_bytes()
+    if len(data) < 13 or data[:6] not in {b"GIF87a", b"GIF89a"}:
+        raise ValueError("invalid GIF header")
+
+    width, height = struct.unpack("<HH", data[6:10])
+    packed = data[10]
+    cursor = 13
+    if packed & 0x80:
+        cursor += 3 * (2 ** ((packed & 0x07) + 1))
+
+    def skip_sub_blocks(position: int) -> int:
+        while position < len(data):
+            block_size = data[position]
+            position += 1
+            if block_size == 0:
+                return position
+            position += block_size
+        raise ValueError("unterminated GIF data block")
+
+    frames = 0
+    while cursor < len(data):
+        marker = data[cursor]
+        cursor += 1
+        if marker == 0x3B:  # trailer
+            break
+        if marker == 0x21:  # extension
+            if cursor >= len(data):
+                raise ValueError("truncated GIF extension")
+            cursor += 1  # extension label
+            cursor = skip_sub_blocks(cursor)
+            continue
+        if marker != 0x2C:  # image descriptor
+            raise ValueError(f"unexpected GIF block marker 0x{marker:02x}")
+        frames += 1
+        if cursor + 9 > len(data):
+            raise ValueError("truncated GIF image descriptor")
+        local_packed = data[cursor + 8]
+        cursor += 9
+        if local_packed & 0x80:
+            cursor += 3 * (2 ** ((local_packed & 0x07) + 1))
+        if cursor >= len(data):
+            raise ValueError("missing GIF LZW code size")
+        cursor += 1
+        cursor = skip_sub_blocks(cursor)
+
+    return width, height, frames
 
 
 def validate_network(urls: list[str]) -> list[str]:
@@ -88,7 +153,7 @@ def validate_network(urls: list[str]) -> list[str]:
             continue
         request = urllib.request.Request(
             url,
-            headers={"User-Agent": "github-profile-integrity-check/1.0"},
+            headers={"User-Agent": "github-profile-integrity-check/2.0"},
             method="HEAD",
         )
         try:
@@ -113,96 +178,136 @@ def main() -> int:
         help="also perform best-effort checks of external HTTP links",
     )
     args = parser.parse_args()
-
     errors: list[str] = []
+
     if not README.exists():
         fail("README.md is missing")
         return 1
 
     text = README.read_text(encoding="utf-8")
-
     lowered = text.lower()
+
     for phrase in REQUIRED_TEXT:
         if phrase not in lowered:
             errors.append(f"required profile phrase is missing: {phrase!r}")
-
     for provider in FORBIDDEN_PROVIDERS:
         if provider in lowered:
             errors.append(f"template-style external widget is forbidden: {provider}")
 
-    references = sorted(local_references(text))
-    if len(references) < 12:
-        errors.append(f"expected at least 12 local visual assets, found {len(references)}")
+    if text.count("<details>") != 4:
+        errors.append("each of the four featured builds must have one debrief")
+    if text.count('prefers-reduced-motion: reduce') != 2:
+        errors.append("both animated product loops need reduced-motion fallbacks")
 
-    for path in references:
-        if not path.is_relative_to(ROOT):
-            errors.append(f"local reference escapes the repository: {path}")
+    references = referenced_assets(text)
+    referenced_relative: set[str] = set()
+    for path in sorted(references):
+        if not path.is_relative_to(ASSETS):
+            errors.append(f"local media reference escapes assets/: {path}")
             continue
+        relative = path.relative_to(ASSETS).as_posix()
+        referenced_relative.add(relative)
         if not path.exists():
-            errors.append(f"local reference does not exist: {path.relative_to(ROOT)}")
-            continue
-        if path.suffix.lower() == ".svg":
-            try:
-                root = ET.parse(path).getroot()
-            except ET.ParseError as exc:
-                errors.append(f"invalid SVG {path.relative_to(ROOT)}: {exc}")
-                continue
+            errors.append(f"local media reference does not exist: assets/{relative}")
+
+    if referenced_relative != EXPECTED_ASSETS:
+        errors.append(
+            "README media set differs from the editorial system: "
+            f"missing={sorted(EXPECTED_ASSETS - referenced_relative)}, "
+            f"unexpected={sorted(referenced_relative - EXPECTED_ASSETS)}"
+        )
+
+    present_assets = {
+        path.relative_to(ASSETS).as_posix()
+        for path in ASSETS.rglob("*")
+        if path.is_file()
+    }
+    if present_assets != EXPECTED_ASSETS:
+        errors.append(
+            "repository contains stale or missing profile media: "
+            f"missing={sorted(EXPECTED_ASSETS - present_assets)}, "
+            f"stale={sorted(present_assets - EXPECTED_ASSETS)}"
+        )
+
+    hero = ASSETS / "editorial-race-hero.svg"
+    if hero.exists():
+        try:
+            root = ET.parse(hero).getroot()
             if not root.tag.endswith("svg"):
-                errors.append(f"asset is not an SVG root: {path.relative_to(ROOT)}")
+                errors.append("hero asset does not have an SVG root")
+            if root.attrib.get("width") != "1200" or root.attrib.get("height") != "320":
+                errors.append("hero must remain 1200x320")
             children = {child.tag.rsplit("}", 1)[-1] for child in root}
             if not {"title", "desc"}.issubset(children):
-                errors.append(f"SVG lacks title/description: {path.relative_to(ROOT)}")
-        elif path.suffix.lower() == ".png" and path.exists():
-            with path.open("rb") as image_file:
-                header = image_file.read(24)
-            if len(header) < 24 or header[:8] != b"\x89PNG\r\n\x1a\n":
-                errors.append(f"invalid PNG header: {path.relative_to(ROOT)}")
-            else:
-                width, height = struct.unpack(">II", header[16:24])
-                if width < 1000 or height < 700:
-                    errors.append(
-                        f"showcase image is too small: {path.relative_to(ROOT)} "
-                        f"({width}x{height})"
-                    )
+                errors.append("hero SVG lacks title and description")
+            hero_text = hero.read_text(encoding="utf-8")
+            if "prefers-reduced-motion" not in hero_text or "@keyframes" not in hero_text:
+                errors.append("hero needs both animation and a reduced-motion state")
+        except ET.ParseError as exc:
+            errors.append(f"invalid hero SVG: {exc}")
 
-    referenced_svgs = {
-        path.relative_to(ROOT / "assets").as_posix()
-        for path in references
-        if path.suffix.lower() == ".svg"
-    }
-    referenced_screenshots = {
-        path.relative_to(ROOT / "assets").as_posix()
-        for path in references
-        if path.suffix.lower() == ".png"
-    }
-    if referenced_svgs != EXPECTED_SVGS:
-        errors.append(
-            "SVG set differs from the designed system: "
-            f"missing={sorted(EXPECTED_SVGS - referenced_svgs)}, "
-            f"unexpected={sorted(referenced_svgs - EXPECTED_SVGS)}"
-        )
-    if referenced_screenshots != EXPECTED_SCREENSHOTS:
-        errors.append(
-            "showcase screenshot set differs from the designed system: "
-            f"missing={sorted(EXPECTED_SCREENSHOTS - referenced_screenshots)}, "
-            f"unexpected={sorted(referenced_screenshots - EXPECTED_SCREENSHOTS)}"
-        )
+    for relative, expected_size in EXPECTED_PNG_SIZE.items():
+        path = ASSETS / relative
+        if not path.exists():
+            continue
+        try:
+            actual_size = png_size(path)
+            if actual_size != expected_size:
+                errors.append(
+                    f"assets/{relative} is {actual_size[0]}x{actual_size[1]}, "
+                    f"expected {expected_size[0]}x{expected_size[1]}"
+                )
+        except ValueError as exc:
+            errors.append(f"assets/{relative}: {exc}")
 
-    alt_matches = re.finditer(
-        r"""<img\b[^>]*\balt=(?P<quote>["'])(?P<alt>.*?)(?P=quote)""",
-        text,
-        re.IGNORECASE,
+    for relative in EXPECTED_GIFS:
+        path = ASSETS / relative
+        if not path.exists():
+            continue
+        try:
+            width, height, frames = gif_info(path)
+            if (width, height) != (960, 540):
+                errors.append(f"assets/{relative} must be 960x540, got {width}x{height}")
+            if frames < 2:
+                errors.append(f"assets/{relative} is not visibly animated")
+            if path.stat().st_size >= MAX_GIF_BYTES:
+                errors.append(
+                    f"assets/{relative} exceeds the 2.5 MB loop budget "
+                    f"({path.stat().st_size} bytes)"
+                )
+        except ValueError as exc:
+            errors.append(f"assets/{relative}: {exc}")
+
+    total_media_bytes = sum(
+        path.stat().st_size for path in ASSETS.rglob("*") if path.is_file()
     )
-    alt_texts = [match.group("alt") for match in alt_matches]
-    if len(alt_texts) < 12:
-        errors.append(f"expected at least 12 accessible images, found {len(alt_texts)}")
-    if any(len(alt.strip()) < 30 for alt in alt_texts):
-        errors.append("every visual must have meaningful alternative text")
+    if total_media_bytes >= MAX_MEDIA_BYTES:
+        errors.append(
+            f"profile media exceeds the 8 MB budget ({total_media_bytes} bytes)"
+        )
+
+    alt_texts = [
+        match.group("alt")
+        for match in re.finditer(
+            r"""<img\b[^>]*\balt=(?P<quote>[\"'])(?P<alt>.*?)(?P=quote)""",
+            text,
+            re.IGNORECASE,
+        )
+    ]
+    if len(alt_texts) != 5:
+        errors.append(f"expected five accessible visible images, found {len(alt_texts)}")
+    if any(len(alt.strip()) < 40 for alt in alt_texts):
+        errors.append("every visible image needs meaningful alternative text")
+
+    remote_images = re.findall(
+        r"""<img\b[^>]*\bsrc=[\"']https?://""", text, re.IGNORECASE
+    )
+    if remote_images:
+        errors.append("remote image widgets are not allowed")
 
     urls = sorted({url.rstrip(".,") for url in EXTERNAL_URL.findall(text)})
-    if len(urls) < 10:
-        errors.append(f"expected at least 10 evidence/contact URLs, found {len(urls)}")
-
+    if len(urls) < 12:
+        errors.append(f"expected at least 12 evidence/contact URLs, found {len(urls)}")
     if args.network:
         errors.extend(validate_network(urls))
 
@@ -212,8 +317,10 @@ def main() -> int:
         return 1
 
     print(
-        f"Profile verified: {len(references)} local assets, "
-        f"{len(urls)} external evidence/contact URLs."
+        "Profile verified: "
+        f"{len(references)} local media references, "
+        f"{len(urls)} external evidence/contact URLs, "
+        f"{total_media_bytes / 1_000_000:.2f} MB total media."
     )
     return 0
 

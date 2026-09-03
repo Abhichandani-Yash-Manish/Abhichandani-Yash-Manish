@@ -1,67 +1,45 @@
 # Profile release checklist
 
-## Repository
+## Local integrity
 
+- [ ] `python3 scripts/build_visuals.py` produces no hero diff.
 - [ ] `python3 scripts/verify_profile.py` passes.
-- [ ] `python3 scripts/build_visuals.py` produces no asset diff.
-- [ ] All seven SVG panels render without clipped or missing text.
-- [ ] All five product screenshots load from the repository.
-- [ ] The animated hero remains legible with reduced motion.
-- [ ] The README has no unsupported project claims.
-- [ ] The profile is readable on GitHub desktop and mobile widths.
-- [ ] The profile is checked in GitHub light and dark mode.
+- [ ] `git diff --check` passes.
+- [ ] The asset directory contains one hero, two GIFs, two reduced-motion fallbacks, and two static project captures—nothing else.
+- [ ] Both GIFs are 960×540, six seconds, 10 FPS, visibly multi-frame, and below 2.5 MB.
+- [ ] Total local README media remains below 8 MB.
+- [ ] All project statements still match public repository evidence.
 
-## GitHub profile settings
+## Render review
 
-- [ ] Decide whether `CodeDrifter_2507` remains the public display name; the README now uses it intentionally as the callsign.
-- [ ] Use one canonical public email.
-- [ ] Use one verified LinkedIn URL.
-- [ ] Suggested bio: “Computer Engineering + IITM Data Science student building resilient products, honest ML systems, and F1 software.”
-- [ ] Add a stable flagship site as the profile website.
+- [ ] Hero is readable before, during, and after animation.
+- [ ] Reduced-motion mode shows the hero's final state and static product fallbacks.
+- [ ] GitHub desktop at 1440 px is checked in light mode.
+- [ ] GitHub desktop at 1440 px is checked in dark mode.
+- [ ] GitHub mobile at 390 px has no clipped text or unreadable project copy.
+- [ ] The project order is F1 Apex, Turnout Lab, GlobeTrotter, PRISM IEMS.
+- [ ] There are no remote image widgets, broken media, accidental credentials, or personal demo data.
 
-## Flagship repository metadata
+## Signed-out evidence check
 
-- [ ] Add a concise description and homepage to GlobeTrotter.
-- [ ] Add a concise description and homepage to PRISM IEMS.
-- [ ] Add a concise description to PharmaGuard.
-- [ ] Add five to eight specific topics to every pinned repository.
-- [ ] Add or confirm an appropriate license for each reusable project.
-- [ ] Expand BEOS+ documentation with screenshots, setup, architecture, limitations, and evidence.
+- [ ] [F1 Apex](https://apexpredict.live) opens to the public command center.
+- [ ] [Turnout Lab](https://github.com/Abhichandani-Yash-Manish/turnout-lab) exposes the case study and measured artifacts.
+- [ ] [GlobeTrotter](https://globetrotter-vert-ten.vercel.app/share/demo-europe-trip) opens the published itinerary without credentials.
+- [ ] [PRISM IEMS](https://prism-iems.vercel.app) opens its public entry experience.
+- [ ] Every garage source/live link opens.
+- [ ] Email and LinkedIn target the intended destinations.
 
-Suggested topics:
+## Pull request boundary
 
-- Turnout Lab: `machine-learning`, `scikit-learn`, `streamlit`, `data-quality`, `model-calibration`, `responsible-ml`
-- GlobeTrotter: `nextjs`, `typescript`, `prisma`, `turso`, `maplibre`, `travel-planner`
-- PRISM IEMS: `nextjs`, `fastapi`, `langgraph`, `supabase`, `education`, `ai-agents`
-- F1 Apex: `formula-one`, `nextjs`, `typescript`, `predictions`, `motorsport`, `telemetry`
+- [ ] GitHub Actions passes on the latest commit.
+- [ ] PR title describes the editorial race-console reset.
+- [ ] PR body names the content, motion, performance, and verification decisions.
+- [ ] The final GitHub-rendered diff is reviewed before approval.
+- [ ] `main` remains unchanged until the user approves the PR.
+- [ ] Use a squash merge after approval so the rejected visual iterations do not enter `main` as separate commits.
 
-## Naming
+## Optional profile metadata
 
-Consider these repository renames only after checking deployment and clone references:
-
-- `F1-Prefictor-Vibe_Project` → `f1-apex`
-- `Void-Pointers-Aetrix-2026-` → `pharmaguard`
-- `BEOS_PLUS` → `beos-plus`
-
-GitHub redirects old repository URLs, but deployment integrations, package metadata, clone commands, and documentation still need verification.
-
-## Pin order
-
-Recommended identity-led order:
-
-1. F1 Apex
-2. Turnout Lab
-3. GlobeTrotter
-4. PRISM IEMS
-5. Cosmic Lens
-6. PharmaGuard or BEOS+
-
-## Final signed-out rehearsal
-
-- [ ] Hero and starting-light animation appear instead of alt text.
-- [ ] Every product screenshot appears at readable resolution.
-- [ ] Turnout Lab and all evidence anchors open.
-- [ ] GlobeTrotter's live planning journey opens.
-- [ ] F1 Apex, PRISM, Cosmic Lens, and BEOS+ return usable public pages.
-- [ ] Email and LinkedIn open the intended destinations.
-- [ ] No private repository or authentication wall blocks featured evidence.
+- [ ] Keep `CodeDrifter_2507` as the callsign while `Yash Abhichandani` remains the primary identity.
+- [ ] Suggested bio: `Computer Engineering + IITM Data Science student building full-stack products, honest ML systems, and F1 software.`
+- [ ] Suggested pin order: F1 Apex, Turnout Lab, GlobeTrotter, PRISM IEMS, Cosmic Lens, PharmaGuard or BEOS+.

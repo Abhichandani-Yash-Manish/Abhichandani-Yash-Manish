@@ -1,67 +1,75 @@
-# Pit Wall — profile design system
+# Editorial race console — profile design contract
 
-This document protects the profile's point of view when projects change. It is not part of the public reading path.
+This document protects the README's point of view when projects change. It is intentionally outside the public reading path.
 
 ## Brief
 
-- **Subject:** Yash Abhichandani, an engineering student whose Formula 1 obsession and systems mindset reinforce each other.
+- **Subject:** Yash Abhichandani, an engineering student whose Formula 1 interest and systems mindset reinforce each other.
 - **Audience:** technical reviewers, developer-community leads, hackathon judges, recruiters, and future collaborators.
-- **Single job:** create a memorable identity in five seconds, prove technical judgment in sixty, then route the reader to live evidence.
+- **Job:** establish a memorable identity in five seconds, prove technical judgment in sixty, then route the reader to working evidence.
+- **Tone:** personal, exact, ambitious, and explainable. Never corporate theatre.
 
-The profile is not a résumé pasted into Markdown. It is a motorsport engineering dossier.
+## Design thesis
 
-## Thesis
+The profile is a GitHub README first and an editorial race console second.
 
-> I build fast. I refuse to ship blind.
-
-Formula 1 is the organizing grammar, not decoration:
-
-```text
-LIGHTS OUT → SECTORS → PADDOCK → PIT CREW → TEAM RADIO
-```
-
-The sequence mirrors how a visitor reads the profile: identity, operating method, flagship evidence, project range, capability, contact.
+Native Markdown carries the argument. One animated hero establishes identity; two real product loops prove motion; two static captures slow the page down where evidence matters more than spectacle. Formula 1 language communicates hierarchy and personal taste—it does not rename every ordinary software concept.
 
 ## Visual system
 
 | Token | Value | Use |
 |:--|:--|:--|
-| Carbon | `#03050A` | Primary surface |
-| Cockpit | `#07101B` | Deep-blue technical surface |
-| Racing red | `#FF254A` | Consequential decisions and motorsport energy |
-| Telemetry cyan | `#00E5FF` | System signals and resilient product work |
-| Violet | `#9A6CFF` | Agentic/data-system accents |
-| Verification green | `#26E6A4` | Tested or supported outcomes |
-| Warm yellow | `#FFC857` | Curiosity, tools, and secondary telemetry |
+| Asphalt | `#080A0D` | Hero ground |
+| Graphite | `#0D1117` | Primary technical surface |
+| Warm white | `#F2F0EA` | Identity and readable type |
+| Racing red | `#FF304A` | Callsign, starting lights, consequential emphasis |
+| Telemetry cyan | `#5ED7E8` | Live/system signal |
+| Steel | `#69717C` | Utility copy |
+| Hairline | `#222832` | Structure without visual noise |
 
-All generated panels stay dark in both GitHub themes. That is a deliberate identity decision: the profile should feel like the same cockpit in every environment, not a generic light/dark dashboard pair.
+The hero is always dark so its identity remains stable in GitHub light and dark themes. Everything below it uses GitHub's native theme.
 
 ## Signature risk
 
-The hero uses an animated five-light gantry and a circuit trace. Motion is concentrated there, remains legible when animation fails, and respects `prefers-reduced-motion`. The rest of the profile is static.
+The 1200×320 hero stages a calm nine-second sequence:
 
-Project screenshots are the primary visual evidence. The custom SVG system supplies narrative and telemetry; it never replaces proof of the actual products.
+1. Five starting lights illuminate.
+2. A telemetry/circuit line draws across the frame.
+3. The name and callsign resolve.
+4. The capability line settles into a readable final state.
+
+If animation is unsupported, the SVG is still legible. `prefers-reduced-motion` removes every transition and exposes the final composition.
+
+## Motion and media budget
+
+- Exactly one animated SVG hero.
+- Exactly two six-second product GIFs, captured from public applications.
+- GIF canvas: 960×540 at 10 FPS.
+- Maximum loop size: 2.5 MB each.
+- Maximum total local media: 8 MB.
+- Every GIF has a static PNG fallback selected by reduced-motion media preference.
+- Turnout Lab and PRISM IEMS remain static evidence captures.
 
 ## Content rules
 
-1. Keep “Lights out. Systems on.” and “I build fast. I refuse to ship blind.” as the identity anchors.
-2. F1 terminology must describe real information architecture—not fill empty space.
-3. Feature no metric without a reproducible source repository.
-4. Use screenshots only from current public builds or repository documentation.
-5. Keep two flagship sectors deeper than the rest of the paddock.
-6. Label prototypes and experiments honestly; do not imply production readiness.
-7. Avoid third-party stat widgets, fake progress meters, contribution theatre, and percentage-based skill bars.
-8. When a better project arrives, replace a paddock entry instead of endlessly lengthening the README.
-9. Rebuild visuals with `python3 scripts/build_visuals.py`; generated SVGs are not edited by hand.
+1. Keep the personal opening about clocks, messy data, hackathons, and Formula 1.
+2. Feature four projects deeply and keep the garage to four compact entries.
+3. Give every featured project one mission, one technology line, one meaningful decision, and live/source evidence.
+4. Put secondary detail behind one native `<details>` debrief.
+5. Audit claims against the linked repository or deployed product.
+6. Report measured ML performance honestly, including weak or modest signal.
+7. Do not use activity widgets, generic badge walls, fabricated statistics, or percentage skill bars.
+8. Do not use official Formula 1 or team logos in custom profile artwork.
+9. When a stronger project arrives, replace an entry instead of extending the page indefinitely.
+10. Regenerate the hero with `python3 scripts/build_visuals.py`; do not hand-edit the generated SVG.
 
-## Maintenance
-
-Run:
+## Maintenance gate
 
 ```bash
 python3 scripts/build_visuals.py
+git diff --exit-code -- assets/editorial-race-hero.svg
 python3 scripts/verify_profile.py
 python3 scripts/verify_profile.py --network
 ```
 
-Review the content whenever a deployment, repository name, measured metric, or current project status changes.
+Re-record a loop only when the linked production interface materially changes. Review every deployment, repository name, metric, and contact URL before release.

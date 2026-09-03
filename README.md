@@ -1,145 +1,177 @@
 <div align="center">
 
-<img src="./assets/hero.svg" width="100%" alt="Lights out. Systems on. Yash Abhichandani, CodeDrifter 2507, builds full-stack products, applied machine-learning systems, and agentic workflows. I build fast. I refuse to ship blind." />
+<img src="./assets/editorial-race-hero.svg" width="100%" alt="Yash Abhichandani, CodeDrifter 2507 — full-stack, applied machine-learning, and agentic-systems builder." />
 
 <br>
 
-[**ENTER THE PADDOCK**](https://github.com/Abhichandani-Yash-Manish?tab=repositories) &nbsp;·&nbsp; [**OPEN F1 TELEMETRY**](https://apexpredict.live) &nbsp;·&nbsp; [**LINKEDIN**](https://in.linkedin.com/in/yash-abhichandani-dev) &nbsp;·&nbsp; [**TEAM RADIO**](mailto:yashraj2507@gmail.com)
+[**F1 APEX**](https://apexpredict.live) &nbsp;·&nbsp; [**PROJECTS**](https://github.com/Abhichandani-Yash-Manish?tab=repositories) &nbsp;·&nbsp; [**LINKEDIN**](https://in.linkedin.com/in/yash-abhichandani-dev) &nbsp;·&nbsp; [**EMAIL**](mailto:yashraj2507@gmail.com)
 
 </div>
 
 I am happiest when the clock is running, the data is messy, and the system still has to work. That is probably why I like both **hackathons** and **Formula 1**.
 
-I am **Yash**—a Computer Engineering student at Dharmsinh Desai University and a Data Science student at IIT Madras. I build full-stack products, applied ML systems, and agentic workflows. I care about the parts that usually get hidden after a demo: leaked data, access boundaries, fallback paths, calibrated uncertainty, and whether somebody else can actually run the repository.
+I am **Yash**—a Computer Engineering student at Dharmsinh Desai University and a Data Science student at IIT Madras. I work where product engineering, applied intelligence, and visual storytelling meet. I like ambitious ideas, but I care just as much about what makes them defensible: clean data, explicit boundaries, resilient fallbacks, and a demo that actually runs.
 
-<img src="./assets/race-strategy.svg" width="100%" alt="Race strategy: no vanity laps. Audit data, design contracts, build fallbacks, test real journeys, and ship proof." />
+---
+
+## `01 / INITIALIZE`
+
+```yaml
+name: Yash Abhichandani
+callsign: CodeDrifter_2507
+base: Gujarat, India
+education:
+  - Computer Engineering @ Dharmsinh Desai University
+  - BS in Data Science @ IIT Madras
+operating_mode:
+  build: full-stack products people can use
+  investigate: data quality, failure modes, system boundaries
+  explore: applied ML, RAG, agentic workflows, motorsport software
+  ship: runnable repositories, honest demos, visible evidence
+current_signal: "Turning ambitious ideas into systems people can use"
+```
+
+---
+
+## `02 / FEATURED BUILDS`
+
+### `01` F1 Apex — race weekend, made social
+
+<a href="https://apexpredict.live">
+  <picture>
+    <source media="(prefers-reduced-motion: reduce)" srcset="./assets/previews/f1-apex-static.png">
+    <img src="./assets/previews/f1-apex-loop.gif" width="100%" alt="F1 Apex moving from its race-weekend prediction command center toward the next-session card and entry controls." />
+  </picture>
+</a>
+
+A prediction game for turning Formula 1 weekends into something friends can compete over—picks, private leagues, scoring, deadlines, rivalries, and telemetry in one command center.
+
+`Next.js` · `TypeScript` · `FastAPI` · `Supabase` · `OpenF1`
+
+**Engineering decision.** Session deadlines and scoring rules are treated as product logic, not as decoration around a generic fantasy interface.
+
+[**Live product ↗**](https://apexpredict.live) · [**Source ↗**](https://github.com/Abhichandani-Yash-Manish/F1-Prefictor-Vibe_Project)
+
+<details>
+<summary><strong>Engineering debrief</strong></summary>
+
+The system models qualifying and race predictions, fastest-lap picks, global and private leagues, standings, notifications, and race-session context. The interface borrows motorsport's information density without copying official Formula 1 or team branding; the project is clearly presented as an unofficial fan build.
+
+</details>
 
 <br>
 
-<img src="./assets/sector-turnout.svg" width="100%" alt="Sector 01, model integrity. The perfect score was a red flag. Turnout Lab quarantined complete official test overlap before leakage-safe evaluation." />
+### `02` Turnout Lab — the benchmark was the first bug
 
 <a href="https://github.com/Abhichandani-Yash-Manish/turnout-lab">
-  <img src="./assets/showcase/turnout-lab.png" width="100%" alt="Turnout Lab Streamlit decision dashboard showing leakage-safe rows, repeated cross-validation metrics, Brier skill, and a single-registration scoring form." />
+  <img src="./assets/previews/turnout-lab.png" width="100%" alt="Turnout Lab decision dashboard showing a leakage audit, repeated grouped validation metrics, calibrated attendance probability, and reliability warnings." />
 </a>
 
-### Turnout Lab // leakage-aware attendance forecasting
+A leakage-aware attendance forecasting system that estimates turnout without pretending a compromised official split is valid evidence.
 
-The obvious job was to train a classifier. The important discovery was that **all 100 official test records also appeared in training**. I quarantined test-linked identities and feature fingerprints before development, then used group-safe validation, fold-local preprocessing, calibration, threshold diagnostics, and reproducible artifacts.
+`Python` · `scikit-learn` · `Streamlit` · `Plotly` · `SQLite` · `pytest`
 
-`397 leakage-safe rows` · `25 outer folds` · `ROC-AUC 0.635` · `Macro-F1 0.584` · `Brier skill +5.1%`
+**Engineering decision.** All 100 official test records overlapped training, so their linked rows were quarantined before any modeling and every reported score came from grouped, leakage-safe out-of-fold evaluation.
 
-[**OPEN CASE FILE →**](https://github.com/Abhichandani-Yash-Manish/turnout-lab) &nbsp; [Data audit](https://github.com/Abhichandani-Yash-Manish/turnout-lab#data-quality-audit) · [Evaluation](https://github.com/Abhichandani-Yash-Manish/turnout-lab#model-comparison-and-selection) · [Model card](https://github.com/Abhichandani-Yash-Manish/turnout-lab#model-card-and-responsible-use)
+[**Case study + source ↗**](https://github.com/Abhichandani-Yash-Manish/turnout-lab)
 
 <details>
-<summary><strong>ENGINEER'S DEBRIEF / why this decision matters</strong></summary>
+<summary><strong>Engineering debrief</strong></summary>
 
-<br>
-
-A model trained against that official split could look exceptional while measuring memorization. The final system instead reports modest signal honestly, separates attendance probability from input reliability, prevents student IDs from entering the model, and frames no-show risk as a prompt for supportive reminders—not punishment.
-
-The repository includes the audit, executed notebook, repeated out-of-fold diagnostics, deterministic tests, batch scoring, scenario analysis, privacy-aware operational logging, and the exact 100-row submission artifact.
+The final development cohort contains 397 leakage-safe rows. Model selection uses 25 outer folds across fixed seeds with fold-local preprocessing, calibration, and threshold selection. The resulting random forest reports ROC-AUC `0.635`, Macro-F1 `0.584`, Brier score `0.221`, and Brier skill `+5.1%`—modest signal, measured honestly. The app separates prediction probability from input reliability and never stores student identifiers in its operational logs.
 
 </details>
 
 <br>
 
-<img src="./assets/sector-globetrotter.svg" width="100%" alt="Sector 02, product resilience. The demo does not break when the API does. GlobeTrotter uses durable data and deliberate fallbacks." />
+### `03` GlobeTrotter — the trip survives the refresh
 
-<a href="https://globetrotter-vert-ten.vercel.app">
-  <img src="./assets/showcase/globetrotter.png" width="100%" alt="GlobeTrotter route planner showing a multi-city European itinerary, route map, trip budget, dates, and collaborative planning workspace." />
+<a href="https://globetrotter-vert-ten.vercel.app/share/demo-europe-trip">
+  <picture>
+    <source media="(prefers-reduced-motion: reduce)" srcset="./assets/previews/globetrotter-static.png">
+    <img src="./assets/previews/globetrotter-loop.gif" width="100%" alt="GlobeTrotter switching a published European itinerary between calendar, map, and detailed list planning views." />
+  </picture>
 </a>
 
-### GlobeTrotter // the trip survives the refresh
+A collaborative workspace that turns a multi-city idea into a dated, costed itinerary someone can edit, review, publish, and copy into their own plan.
 
-A collaborative workspace that turns a multi-city idea into a dated, costed itinerary that can be edited, checked, shared, published, and copied. The core journey stays demonstrable without paid services: persisted coordinates backstop routing, keyless maps keep geography visible, and dated offline references make currency limitations explicit.
+`Next.js` · `TypeScript` · `Prisma` · `Turso` · `MapLibre` · `Playwright`
 
-`55 destination dossiers` · `390 activities` · `3 navigation languages` · `0 required paid API keys`
+**Engineering decision.** Persisted coordinates, keyless maps, and dated offline currency references keep the core journey demonstrable when paid services or API keys are unavailable.
 
-[**LAUNCH WORKSPACE →**](https://globetrotter-vert-ten.vercel.app) &nbsp; [Source](https://github.com/Abhichandani-Yash-Manish/GlobeTrotter) · [Architecture](https://github.com/Abhichandani-Yash-Manish/GlobeTrotter#architecture) · [Verification](https://github.com/Abhichandani-Yash-Manish/GlobeTrotter#verification)
+[**Live product ↗**](https://globetrotter-vert-ten.vercel.app) · [**Published itinerary ↗**](https://globetrotter-vert-ten.vercel.app/share/demo-europe-trip) · [**Source ↗**](https://github.com/Abhichandani-Yash-Manish/GlobeTrotter)
 
 <details>
-<summary><strong>ENGINEER'S DEBRIEF / what lives below the interface</strong></summary>
+<summary><strong>Engineering debrief</strong></summary>
 
-<br>
-
-Role-aware collaboration, invitation tokens, transactional trip copying, budget controls, trip-health checks, persistent SQLite/Turso storage, seeded editorial data, multilingual navigation, and explicit degraded modes. The deployment is part of the evidence; the interface is not a mockup.
+GlobeTrotter combines role-aware collaboration, hashed invitation links, transactional trip copying, itinerary health checks, budget controls, responsive list/calendar/map views, and persistent SQLite/Turso storage. Its seeded path includes 55 destination dossiers and 390 distinct activities, while the verification gate covers data quality, permissions, fallbacks, builds, and browser journeys.
 
 </details>
 
 <br>
 
-<img src="./assets/paddock.svg" width="100%" alt="Paddock of selected builds: F1 Apex, PRISM IEMS, Cosmic Lens, PharmaGuard, and BEOS Plus." />
+### `04` PRISM IEMS — institutional signals, one operating view
 
-<table>
-  <tr>
-    <td width="50%" valign="top">
-      <a href="https://apexpredict.live"><img src="./assets/showcase/f1-apex.png" width="100%" alt="F1 Apex telemetry command center with race-session status, prediction controls, next-race countdown, and a dark red motorsport interface." /></a>
-      <br><br>
-      <strong>F1 APEX // race weekend, engineered</strong><br>
-      <sub>Predictions · leagues · scoring · telemetry</sub><br><br>
-      <a href="https://apexpredict.live"><strong>LIVE TELEMETRY →</strong></a> · <a href="https://github.com/Abhichandani-Yash-Manish/F1-Prefictor-Vibe_Project">SOURCE</a>
-    </td>
-    <td width="50%" valign="top">
-      <a href="https://prism-iems.vercel.app"><img src="./assets/showcase/prism-iems.png" width="100%" alt="PRISM IEMS institutional war room displaying intervention risks, escalation metrics, and operational decision cards." /></a>
-      <br><br>
-      <strong>PRISM IEMS // institution ops with guardrails</strong><br>
-      <sub>Roles · agents · approvals · intervention queues</sub><br><br>
-      <a href="https://prism-iems.vercel.app"><strong>OPEN WAR ROOM →</strong></a> · <a href="https://github.com/Abhichandani-Yash-Manish/prism-iems">SOURCE</a>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <a href="https://cosmiclens-iota.vercel.app"><img src="./assets/showcase/cosmic-lens.png" width="100%" alt="Cosmic Lens astronomy platform landing page with a star field and navigation for archives, data analysis, infographics, timeline, and community." /></a>
-      <br><br>
-      <strong>COSMIC LENS // signal in the early universe</strong><br>
-      <sub>Archive · analysis · visualization · community</sub><br><br>
-      <a href="https://cosmiclens-iota.vercel.app"><strong>START EXPLORING →</strong></a> · <a href="https://github.com/Abhichandani-Yash-Manish/Cosmic-Lens-by-Team-Void_Pointers">SOURCE</a>
-    </td>
-    <td width="50%" valign="top">
-      <br>
-      <strong>PUBLIC IMPACT // double header</strong><br><br>
-      <sub><strong>PharmaGuard</strong><br>FEFO · expiry alerts · demand forecasts</sub><br>
-      <a href="https://github.com/Abhichandani-Yash-Manish/Void-Pointers-Aetrix-2026-"><strong>INSPECT →</strong></a>
-      <br><br>
-      <sub><strong>BEOS+</strong><br>Inventory · emergency maps · donor alerts</sub><br>
-      <a href="https://beos-plus.vercel.app"><strong>LAUNCH →</strong></a> · <a href="https://github.com/Abhichandani-Yash-Manish/BEOS_PLUS">SOURCE</a>
-      <br><br>
-      <strong>IN THE GARAGE</strong><br>
-      <sub><a href="https://github.com/Abhichandani-Yash-Manish/apex-simulate"><strong>APEX SIMULATE</strong></a> // strategy + telemetry<br>
-      <a href="https://github.com/Abhichandani-Yash-Manish/ClubAtlas"><strong>CLUBATLAS</strong></a> // grounded actions</sub>
-    </td>
-  </tr>
-</table>
+<a href="https://prism-iems.vercel.app">
+  <img src="./assets/previews/prism-iems.png" width="100%" alt="PRISM IEMS institutional operations dashboard showing risk signals, intervention priorities, role-aware metrics, and an intelligence workflow view." />
+</a>
 
-<br>
+An integrated education-management system connecting academic operations, finance, infrastructure, communication, and an AI-assisted intelligence hub.
 
-<img src="./assets/pit-crew.svg" width="100%" alt="Pit crew capability map across TypeScript and React products, Python machine learning and RAG, relational data systems, and tested delivery." />
+`Next.js` · `TypeScript` · `FastAPI` · `LangGraph` · `Supabase` · `pgvector`
 
-The stack is not the personality. The decisions are. I use **TypeScript, React, Next.js, Python, scikit-learn, LangGraph, SQL, Supabase, Turso, Git, CI, Docker, and browser-level QA** when they earn their place in the system.
+**Engineering decision.** Operational workflows and the agent layer are separated across the Next.js application and FastAPI service, while role boundaries and row-level security remain explicit in the data layer.
+
+[**Live system ↗**](https://prism-iems.vercel.app) · [**Source ↗**](https://github.com/Abhichandani-Yash-Manish/prism-iems)
 
 <details>
-<summary><strong>PIT WALL NOTES / how I work with a team</strong></summary>
+<summary><strong>Engineering debrief</strong></summary>
 
-<br>
-
-Hackathons taught me to move quickly. Engineering taught me what must remain after the chequered flag: a repository someone else can run, boundaries someone else can explain, a main journey that stays intact while features evolve, and limitations a reviewer does not have to discover by accident.
-
-I like ambitious teams, small testable interfaces, clear ownership, honest demos, and the moment a wild idea becomes a system we can defend.
+The Intelligence Hub gives distinct jobs to skill-gap analysis, grading, retention-risk, and complaint-routing agents. More than seven institutional roles receive different dashboards and permissions, while the operational suites cover attendance, results, fees, hostel and library workflows, notices, and complaints.
 
 </details>
 
-<br>
+---
 
-<img src="./assets/team-radio.svg" width="100%" alt="Team radio channel open. Bring the ambitious idea and Yash will bring the system questions." />
+## `03 / ENGINEERING TELEMETRY`
 
-<div align="center">
+```text
+PRODUCT       TypeScript · React · Next.js · FastAPI
+INTELLIGENCE  scikit-learn · LangGraph · RAG · evaluation
+DATA          PostgreSQL · SQLite · Supabase · Turso
+DELIVERY      Git · CI · Docker · Vercel · browser QA
+```
 
-### Yash Abhichandani
+Tools change. My loop does not: **audit the problem → design the contract → build the path → test the journey → show the evidence**.
 
-Gujarat, India · Computer Engineering × Data Science · Formula 1 brain, engineering hands
+---
 
-[**EMAIL**](mailto:yashraj2507@gmail.com) &nbsp;·&nbsp; [**LINKEDIN**](https://in.linkedin.com/in/yash-abhichandani-dev) &nbsp;·&nbsp; [**ALL REPOSITORIES**](https://github.com/Abhichandani-Yash-Manish?tab=repositories)
+## `04 / GARAGE`
 
-<sub>Built under pressure. Explained after the chequered flag.</sub>
+- [**PharmaGuard**](https://github.com/Abhichandani-Yash-Manish/Void-Pointers-Aetrix-2026-) — FEFO dispensing, expiry visibility, four-week demand forecasting, and role-aware pharmacy operations.
+- [**BEOS+**](https://beos-plus.vercel.app) — blood inventory, emergency mapping, donor alerts, and separate hospital, blood-bank, donor, and admin workflows. [Source ↗](https://github.com/Abhichandani-Yash-Manish/BEOS_PLUS)
+- [**Cosmic Lens**](https://cosmiclens-iota.vercel.app) — scientific archives, spectral-analysis interfaces, visual explanations, and astronomy storytelling. [Source ↗](https://github.com/Abhichandani-Yash-Manish/Cosmic-Lens-by-Team-Void_Pointers)
+- [**Apex Simulate**](https://github.com/Abhichandani-Yash-Manish/apex-simulate) — a containerized strategy and telemetry lab exploring FastAPI, TimescaleDB, Redis, and stint-level ML experiments.
 
-</div>
+---
+
+## `05 / TEAM FLIGHT LOG`
+
+| Build | My lane | What the work demonstrates |
+|:--|:--|:--|
+| **GlobeTrotter · Odoo × LDCE Hackathon 2026** | Product and system build | Relational modeling, persistent collaboration, graceful degradation, and a public journey that can be verified without credentials. |
+| **PharmaGuard · AETRIX 2026** | Team builder | Translating a healthcare-operations problem into FEFO inventory flows, forecasting, alerts, and a working interface. |
+| **Cosmic Lens · DUHacks 5.0** | Backend architect | Shared architecture, API thinking, scientific-data presentation, and delivery inside a three-person team. |
+| **Apex Simulate** | Independent technical lab | Breaking a large motorsport idea into telemetry storage, service boundaries, event transport, and modeling experiments. |
+
+I like teams with clear ownership, small testable interfaces, honest demos, and enough curiosity to ask what breaks after the happy path.
+
+---
+
+## `06 / OPEN CHANNEL`
+
+If you are building something where a polished interface needs a trustworthy system underneath, I would like to hear about it.
+
+[**Email**](mailto:yashraj2507@gmail.com) · [**LinkedIn**](https://in.linkedin.com/in/yash-abhichandani-dev) · [**GitHub**](https://github.com/Abhichandani-Yash-Manish?tab=repositories)
+
+<sub>Currently building from Gujarat, India. Usually thinking about software, systems, or the next race weekend.</sub>

@@ -17,9 +17,9 @@ jobs:
       - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
-      - name: Rebuild visual system
+      - name: Rebuild editorial hero
         run: |
           python scripts/build_visuals.py
           git diff --exit-code -- assets
-      - name: Verify README and local assets
+      - name: Verify README, animation, and media budget
         run: python scripts/verify_profile.py
