@@ -1,6 +1,5 @@
 <div align="center">
 
-<img src="./assets/profile-banner.svg" width="100%" alt="Yash Abhichandani — full-stack and AI systems builder" />
 
 <br />
 
