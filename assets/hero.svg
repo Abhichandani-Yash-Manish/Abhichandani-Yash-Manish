@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+  <title id="title">Lights out. Systems on. Yash Abhichandani.</title>
+  <desc id="desc">A motorsport engineering profile for Yash Abhichandani, also known as CodeDrifter 2507. Full-stack systems, applied machine learning, and agentic workflows.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#03050A"/>
+      <stop offset=".58" stop-color="#07101B"/>
+      <stop offset="1" stop-color="#17070C"/>
+    </linearGradient>
+    <linearGradient id="signal" x1="0" x2="1">
+      <stop offset="0" stop-color="#FF254A"/>
+      <stop offset=".48" stop-color="#9A6CFF"/>
+      <stop offset="1" stop-color="#00E5FF"/>
+    </linearGradient>
+    <pattern id="grid" width="38" height="38" patternUnits="userSpaceOnUse">
+      <path d="M38 0H0V38" fill="none" stroke="#122235" stroke-width="1"/>
+    </pattern>
+    <pattern id="checks" width="24" height="24" patternUnits="userSpaceOnUse">
+      <rect width="12" height="12" fill="#F8FBFF"/><rect x="12" y="12" width="12" height="12" fill="#F8FBFF"/>
+    </pattern>
+    <filter id="redGlow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="7" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="cyanGlow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <style>
+      .display { font-family: "Arial Narrow", "Avenir Next Condensed", Impact, sans-serif; font-weight: 900; font-stretch: condensed; letter-spacing: -1.4px; }
+      .body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: 1.25px; }
+      
+      .light { animation: ignite 4.8s ease-in-out infinite; }
+      .l1 { animation-delay: 0s; } .l2 { animation-delay: .28s; }
+      .l3 { animation-delay: .56s; } .l4 { animation-delay: .84s; }
+      .l5 { animation-delay: 1.12s; }
+      .trace { stroke-dasharray: 1250; animation: trace 3.2s cubic-bezier(.2,.8,.2,1) both; }
+      .pulse { animation: pulse 2.3s ease-in-out infinite; }
+      @keyframes ignite {
+        0%, 8% { fill: #28101A; filter: none; }
+        14%, 52% { fill: #FF254A; filter: url(#redGlow); }
+        60%, 100% { fill: #28101A; filter: none; }
+      }
+      @keyframes trace { from { stroke-dashoffset: 1250; } to { stroke-dashoffset: 0; } }
+      @keyframes pulse { 0%, 100% { opacity: .35; } 50% { opacity: 1; } }
+      @media (prefers-reduced-motion: reduce) {
+        .light { animation: none; fill: #FF254A; }
+        .trace, .pulse { animation: none; stroke-dashoffset: 0; opacity: 1; }
+      }
+    
+    </style>
+  </defs>
+  <rect width="1200" height="600" rx="28" fill="url(#bg)"/>
+  <rect x="1" y="1" width="1198" height="598" rx="27" fill="none" stroke="#1D3045" stroke-width="2"/>
+  <rect x="20" y="20" width="1160" height="560" rx="18" fill="url(#grid)" opacity=".72"/>
+  
+  <path d="M0 94H1200" stroke="#FF254A" stroke-width="2" opacity=".85"/>
+  <path d="M0 100H1200" stroke="#00E5FF" stroke-width="1" opacity=".18"/>
+  <path d="M0 0H176L125 94H0Z" fill="url(#checks)" opacity=".13"/>
+  <path d="M1200 600H1004L1064 506H1200Z" fill="url(#checks)" opacity=".08"/>
+
+  <text x="54" y="57" class="mono" font-size="13" font-weight="800" fill="#00E5FF">PROFILE TELEMETRY / ONLINE</text>
+  <circle cx="32" cy="52" r="5" fill="#26E6A4" class="pulse"/>
+  <text x="708" y="57" text-anchor="end" class="mono" font-size="12" fill="#8494A8">GUJARAT, INDIA · UTC+05:30</text>
+
+  <g transform="translate(760 32)">
+    <rect width="378" height="48" rx="24" fill="#03050A" stroke="#1D3045"/>
+    <g transform="translate(33 24)"><circle class="light l1" r="10" fill="#28101A"/></g>
+    <g transform="translate(77 24)"><circle class="light l2" r="10" fill="#28101A"/></g>
+    <g transform="translate(121 24)"><circle class="light l3" r="10" fill="#28101A"/></g>
+    <g transform="translate(165 24)"><circle class="light l4" r="10" fill="#28101A"/></g>
+    <g transform="translate(209 24)"><circle class="light l5" r="10" fill="#28101A"/></g>
+    <text x="353" y="29" text-anchor="end" class="mono" font-size="10" font-weight="800" fill="#8494A8">READY / 05</text>
+  </g>
+
+  <text x="54" y="145" class="mono" font-size="13" font-weight="800" fill="#FF254A">CALLSIGN / CODEDRIFTER_2507</text>
+  <text x="50" y="229" class="display" font-size="88" fill="#F8FBFF">LIGHTS OUT.</text>
+  <text x="50" y="313" class="display" font-size="88" fill="#FF254A">SYSTEMS ON.</text>
+  <text x="55" y="365" class="body" font-size="25" font-weight="650" fill="#F8FBFF">Yash Abhichandani</text>
+  <text x="55" y="398" class="body" font-size="18" fill="#8494A8">Computer Engineering × Data Science</text>
+
+  <g transform="translate(56 431)">
+    <rect width="152" height="34" rx="17" fill="#101F31" stroke="#FF254A"/>
+    <text x="76" y="22" text-anchor="middle" class="mono" font-size="10" font-weight="800" fill="#F8FBFF">FULL-STACK</text>
+    <rect x="164" width="146" height="34" rx="17" fill="#101F31" stroke="#00E5FF"/>
+    <text x="237" y="22" text-anchor="middle" class="mono" font-size="10" font-weight="800" fill="#F8FBFF">APPLIED ML</text>
+    <rect x="322" width="182" height="34" rx="17" fill="#101F31" stroke="#9A6CFF"/>
+    <text x="413" y="22" text-anchor="middle" class="mono" font-size="10" font-weight="800" fill="#F8FBFF">AGENTIC SYSTEMS</text>
+  </g>
+
+  <g transform="translate(690 128)">
+    <path d="M103 31C34 68 8 151 54 214C89 262 161 259 204 224C256 181 310 205 350 159C401 99 353 34 288 27C230 21 171-5 103 31Z" fill="none" stroke="#1D3045" stroke-width="13"/>
+    <path class="trace" d="M103 31C34 68 8 151 54 214C89 262 161 259 204 224C256 181 310 205 350 159C401 99 353 34 288 27C230 21 171-5 103 31Z" fill="none" stroke="url(#signal)" stroke-width="4"/>
+    <circle cx="103" cy="31" r="9" fill="#FF254A" filter="url(#redGlow)"/>
+    <circle cx="350" cy="159" r="7" fill="#00E5FF" filter="url(#cyanGlow)"/>
+    <text x="204" y="115" text-anchor="middle" class="display" font-size="46" fill="#F8FBFF">Y/A</text>
+    <text x="204" y="142" text-anchor="middle" class="mono" font-size="10" fill="#8494A8">BUILD / TRACE / VERIFY</text>
+  </g>
+
+  <path d="M690 431H1142" stroke="#1D3045" stroke-width="2"/>
+  <g transform="translate(690 454)">
+    <text y="0" class="mono" font-size="10" fill="#8494A8">CURRENT MODE</text>
+    <text y="27" class="display" font-size="24" fill="#26E6A4">SHIP WITH PROOF</text>
+    <text x="235" y="0" class="mono" font-size="10" fill="#8494A8">FUEL</text>
+    <text x="235" y="27" class="display" font-size="24" fill="#FFC857">CURIOSITY</text>
+  </g>
+
+  <rect x="50" y="516" width="1092" height="48" rx="8" fill="#0B1726" stroke="#1D3045"/>
+  <text x="72" y="547" class="mono" font-size="13" font-weight="850" fill="#F8FBFF">I BUILD FAST. <tspan fill="#FF254A">I REFUSE TO SHIP BLIND.</tspan></text>
+  <text x="1120" y="547" text-anchor="end" class="mono" font-size="10" fill="#8494A8">SCROLL FOR RACE DATA ↓</text>
+
+</svg>

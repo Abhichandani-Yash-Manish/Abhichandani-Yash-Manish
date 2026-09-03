@@ -2,66 +2,66 @@
 
 ## Repository
 
-- [ ] \`python3 scripts/verify_profile.py\` passes.
+- [ ] `python3 scripts/verify_profile.py` passes.
 - [ ] `python3 scripts/build_visuals.py` produces no asset diff.
-- [ ] All six visual panels render in both light and dark mode and contain equivalent information.
+- [ ] All seven SVG panels render without clipped or missing text.
+- [ ] All five product screenshots load from the repository.
+- [ ] The animated hero remains legible with reduced motion.
 - [ ] The README has no unsupported project claims.
-- [ ] Every flagship link opens in a signed-out browser.
+- [ ] The profile is readable on GitHub desktop and mobile widths.
 - [ ] The profile is checked in GitHub light and dark mode.
-- [ ] The profile remains readable at mobile width.
 
 ## GitHub profile settings
 
-- [ ] Change the display name from \`CodeDrifter_2507\` to \`Yash Abhichandani\`.
+- [ ] Decide whether `CodeDrifter_2507` remains the public display name; the README now uses it intentionally as the callsign.
 - [ ] Use one canonical public email.
 - [ ] Use one verified LinkedIn URL.
-- [ ] Suggested bio: “Computer Engineering + IITM Data Science student building decision-aware ML systems and ambitious full-stack products.”
-- [ ] Add a useful website link when a stable portfolio or flagship destination is chosen.
+- [ ] Suggested bio: “Computer Engineering + IITM Data Science student building resilient products, honest ML systems, and F1 software.”
+- [ ] Add a stable flagship site as the profile website.
 
 ## Flagship repository metadata
 
 - [ ] Add a concise description and homepage to GlobeTrotter.
 - [ ] Add a concise description and homepage to PRISM IEMS.
-- [ ] Add a concise description to PharmaGuard Gujarat.
+- [ ] Add a concise description to PharmaGuard.
 - [ ] Add five to eight specific topics to every pinned repository.
-- [ ] Add or confirm an appropriate license for every project intended for reuse.
-- [ ] Audit the F1 Apex description and README claims before presenting it as verified work.
-- [ ] Expand BEOS+ with screenshots, setup, architecture, limitations, and evidence.
+- [ ] Add or confirm an appropriate license for each reusable project.
+- [ ] Expand BEOS+ documentation with screenshots, setup, architecture, limitations, and evidence.
 
 Suggested topics:
 
-- Turnout Lab: \`machine-learning\`, \`scikit-learn\`, \`streamlit\`, \`data-quality\`, \`model-calibration\`, \`responsible-ml\`
-- GlobeTrotter: \`nextjs\`, \`typescript\`, \`prisma\`, \`turso\`, \`maplibre\`, \`travel-planner\`
-- PRISM IEMS: \`nextjs\`, \`fastapi\`, \`langgraph\`, \`supabase\`, \`education\`, \`ai-agents\`
-- PharmaGuard: \`react\`, \`typescript\`, \`flask\`, \`scikit-learn\`, \`firebase\`, \`healthcare\`
+- Turnout Lab: `machine-learning`, `scikit-learn`, `streamlit`, `data-quality`, `model-calibration`, `responsible-ml`
+- GlobeTrotter: `nextjs`, `typescript`, `prisma`, `turso`, `maplibre`, `travel-planner`
+- PRISM IEMS: `nextjs`, `fastapi`, `langgraph`, `supabase`, `education`, `ai-agents`
+- F1 Apex: `formula-one`, `nextjs`, `typescript`, `predictions`, `motorsport`, `telemetry`
 
 ## Naming
 
 Consider these repository renames only after checking deployment and clone references:
 
-- \`F1-Prefictor-Vibe_Project\` → \`f1-apex\`
-- \`Void-Pointers-Aetrix-2026-\` → \`pharmaguard-gujarat\`
-- \`BEOS_PLUS\` → \`beos-plus\`
+- `F1-Prefictor-Vibe_Project` → `f1-apex`
+- `Void-Pointers-Aetrix-2026-` → `pharmaguard`
+- `BEOS_PLUS` → `beos-plus`
 
-GitHub redirects old repository URLs, but README links, deployment integrations, badges, package metadata, and clone commands still need verification.
+GitHub redirects old repository URLs, but deployment integrations, package metadata, clone commands, and documentation still need verification.
 
 ## Pin order
 
-Recommended general-purpose order:
+Recommended identity-led order:
 
-1. Turnout Lab
-2. GlobeTrotter
-3. PharmaGuard Gujarat
+1. F1 Apex
+2. Turnout Lab
+3. GlobeTrotter
 4. PRISM IEMS
-5. BEOS+
-6. F1 Apex or Cosmic Lens after a proof audit
+5. Cosmic Lens
+6. PharmaGuard or BEOS+
 
 ## Final signed-out rehearsal
 
-- [ ] Hero appears instead of alt text.
-- [ ] Turnout Lab repository opens.
-- [ ] GlobeTrotter live journey opens and can be demonstrated.
-- [ ] PRISM, BEOS+, Apex Predict, and Cosmic Lens links return usable pages.
-- [ ] Email link uses the intended address.
-- [ ] LinkedIn opens the intended profile.
-- [ ] No private repository or authentication wall blocks a featured proof link.
+- [ ] Hero and starting-light animation appear instead of alt text.
+- [ ] Every product screenshot appears at readable resolution.
+- [ ] Turnout Lab and all evidence anchors open.
+- [ ] GlobeTrotter's live planning journey opens.
+- [ ] F1 Apex, PRISM, Cosmic Lens, and BEOS+ return usable public pages.
+- [ ] Email and LinkedIn open the intended destinations.
+- [ ] No private repository or authentication wall blocks featured evidence.

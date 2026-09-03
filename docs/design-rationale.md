@@ -1,83 +1,67 @@
-# Decision Trace — profile system
+# Pit Wall — profile design system
 
-This document keeps the profile coherent when projects change. It is not part of the public reading path.
+This document protects the profile's point of view when projects change. It is not part of the public reading path.
 
-## The brief
+## Brief
 
-- **Subject:** Yash Abhichandani as an engineering student who turns ambiguous problems into inspectable systems.
-- **Audience:** technical reviewers, recruiters, hackathon judges, developer-community leads, and potential collaborators.
-- **Single job:** prove engineering judgment within one minute, then route the reader to the strongest evidence.
+- **Subject:** Yash Abhichandani, an engineering student whose Formula 1 obsession and systems mindset reinforce each other.
+- **Audience:** technical reviewers, developer-community leads, hackathon judges, recruiters, and future collaborators.
+- **Single job:** create a memorable identity in five seconds, prove technical judgment in sixty, then route the reader to live evidence.
 
-The profile is not a résumé, an activity dashboard, or a technology inventory.
+The profile is not a résumé pasted into Markdown. It is a motorsport engineering dossier.
 
-## The thesis
+## Thesis
 
-> The decision is part of the deliverable.
+> I build fast. I refuse to ship blind.
 
-The recurring sequence is:
+Formula 1 is the organizing grammar, not decoration:
 
-\`\`\`text
-OBSERVE → QUESTION → DECIDE → BUILD → VERIFY
-\`\`\`
+```text
+LIGHTS OUT → SECTORS → PADDOCK → PIT CREW → TEAM RADIO
+```
 
-Projects earn space in the decision ledger when they contain a defensible constraint, a consequential decision, and public evidence. Recency or visual polish alone is not enough.
+The sequence mirrors how a visitor reads the profile: identity, operating method, flagship evidence, project range, capability, contact.
 
 ## Visual system
 
-| Token | Light | Dark | Use |
-|:--|:--|:--|:--|
-| Canvas | \`#F3F7FA\` | \`#0C1B2A\` | Cool engineering-paper surface |
-| Ink | \`#10243C\` | \`#F4F8FB\` | Primary type |
-| Signal | \`#2D6CDF\` | \`#73A2FF\` | Trace and navigation |
-| Decision | \`#FF705D\` | \`#FF806D\` | The consequential choice |
-| Verification | \`#178F7F\` | \`#2CB4A1\` | Tested outcome |
-| Grid | \`#D8E5EC\` | \`#1B3850\` | Measurement context |
+| Token | Value | Use |
+|:--|:--|:--|
+| Carbon | `#03050A` | Primary surface |
+| Cockpit | `#07101B` | Deep-blue technical surface |
+| Racing red | `#FF254A` | Consequential decisions and motorsport energy |
+| Telemetry cyan | `#00E5FF` | System signals and resilient product work |
+| Violet | `#9A6CFF` | Agentic/data-system accents |
+| Verification green | `#26E6A4` | Tested or supported outcomes |
+| Warm yellow | `#FFC857` | Curiosity, tools, and secondary telemetry |
 
-The hero uses a condensed system-font stack for the name, the platform UI stack for prose, and a monospace stack only for recorder labels. No external font or image provider is required.
+All generated panels stay dark in both GitHub themes. That is a deliberate identity decision: the profile should feel like the same cockpit in every environment, not a generic light/dark dashboard pair.
 
-## The signature system
+## Signature risk
 
-The profile is designed as an **engineering flight recorder**, not a conventional résumé. One decision trace travels through six coordinated instruments:
+The hero uses an animated five-light gantry and a circuit trace. Motion is concentrated there, remains legible when animation fails, and respects `prefers-reduced-motion`. The rest of the profile is static.
 
-1. an animated identity and telemetry hero;
-2. a four-rule operating system;
-3. the Turnout Lab evidence recorder;
-4. the GlobeTrotter journey recorder;
-5. a Formula 1-inspired build circuit;
-6. an open-channel collaboration board.
-
-The boldness is concentrated in this instrument family. Prose is shortened or placed inside expandable notes so the graphics carry the first reading and technical depth remains available on demand.
-
-The hero animates once from observation to verification and remains fully legible without animation. The other panels are static. Formula 1 influences the circuit and telemetry grammar, but does not become the profile's entire subject.
-
-There are no external statistics widgets, skill-logo walls, trophies, contribution snakes, fake progress meters, or decorative badges. Every displayed number belongs to a linked project artifact.
+Project screenshots are the primary visual evidence. The custom SVG system supplies narrative and telemetry; it never replaces proof of the actual products.
 
 ## Content rules
 
-1. Lead with two visual, decision-led case studies, not six equal cards.
-2. Link capabilities to repositories, tests, artifacts, or live journeys.
-3. Say “explores” when a secondary project has not received a current implementation audit.
-4. Do not call a prototype production-ready.
-5. Do not publish a number that cannot be reproduced from the linked repository.
-6. Keep current-focus text broad enough to remain true for several months.
-7. When a stronger project arrives, replace a featured trace; do not endlessly extend the README.
-8. Rebuild generated assets with \`python3 scripts/build_visuals.py\`; never hand-edit only one theme.
+1. Keep “Lights out. Systems on.” and “I build fast. I refuse to ship blind.” as the identity anchors.
+2. F1 terminology must describe real information architecture—not fill empty space.
+3. Feature no metric without a reproducible source repository.
+4. Use screenshots only from current public builds or repository documentation.
+5. Keep two flagship sectors deeper than the rest of the paddock.
+6. Label prototypes and experiments honestly; do not imply production readiness.
+7. Avoid third-party stat widgets, fake progress meters, contribution theatre, and percentage-based skill bars.
+8. When a better project arrives, replace a paddock entry instead of endlessly lengthening the README.
+9. Rebuild visuals with `python3 scripts/build_visuals.py`; generated SVGs are not edited by hand.
 
 ## Maintenance
 
-Review the profile when:
-
-- a flagship project becomes runnable or stops being runnable;
-- a repository is renamed;
-- a deployment URL changes;
-- a technical claim changes;
-- the current focus materially changes.
-
 Run:
 
-\`\`\`bash
+```bash
+python3 scripts/build_visuals.py
 python3 scripts/verify_profile.py
 python3 scripts/verify_profile.py --network
-\`\`\`
+```
 
-The second command performs best-effort external-link checks. LinkedIn is deliberately skipped because it rejects automated requests.
+Review the content whenever a deployment, repository name, measured metric, or current project status changes.

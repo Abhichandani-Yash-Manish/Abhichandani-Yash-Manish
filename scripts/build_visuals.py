@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the profile's light and dark SVG instrument panels."""
+"""Build the profile's motorsport engineering visual system."""
 
 from __future__ import annotations
 
@@ -9,352 +9,310 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 ASSETS = ROOT / "assets"
 
-PALETTES = {
-    "light": {
-        "bg": "#F3F7FA",
-        "panel": "#E8F0F5",
-        "panel2": "#DDE9F0",
-        "ink": "#10243C",
-        "muted": "#536C7E",
-        "grid": "#D2E1E9",
-        "line": "#B6CAD6",
-        "signal": "#2D6CDF",
-        "signal2": "#7158D9",
-        "decision": "#FF705D",
-        "verify": "#178F7F",
-        "white": "#FFFFFF",
-    },
-    "dark": {
-        "bg": "#0C1B2A",
-        "panel": "#112A3D",
-        "panel2": "#17364B",
-        "ink": "#F4F8FB",
-        "muted": "#94ACBD",
-        "grid": "#1B3850",
-        "line": "#2B4C63",
-        "signal": "#73A2FF",
-        "signal2": "#A58BFF",
-        "decision": "#FF806D",
-        "verify": "#2CB4A1",
-        "white": "#FFFFFF",
-    },
+C = {
+    "carbon": "#03050A",
+    "cockpit": "#07101B",
+    "panel": "#0B1726",
+    "panel2": "#101F31",
+    "white": "#F8FBFF",
+    "muted": "#8494A8",
+    "line": "#1D3045",
+    "grid": "#122235",
+    "red": "#FF254A",
+    "cyan": "#00E5FF",
+    "violet": "#9A6CFF",
+    "green": "#26E6A4",
+    "yellow": "#FFC857",
 }
 
 
-def shell(title: str, description: str, height: int, p: dict[str, str], body: str, *, animate: bool = False) -> str:
-    motion = """
-      .draw { stroke-dasharray: 1500; stroke-dashoffset: 0; animation: draw 1.8s cubic-bezier(.2,.75,.25,1) .15s both; }
-      .arrive { opacity: 1; animation: arrive .3s ease-out both; }
-      .a1 { animation-delay: .35s; } .a2 { animation-delay: .65s; }
-      .a3 { animation-delay: .95s; } .a4 { animation-delay: 1.25s; }
-      .a5 { animation-delay: 1.55s; }
-      .scan { animation: scan 4s ease-in-out infinite; }
-      @keyframes draw { from { stroke-dashoffset: 1500; } to { stroke-dashoffset: 0; } }
-      @keyframes arrive { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-      @keyframes scan { 0%, 100% { opacity: .15; } 50% { opacity: .65; } }
-      @media (prefers-reduced-motion: reduce) {
-        .draw, .arrive, .scan { animation: none; opacity: 1; stroke-dashoffset: 0; }
+def frame(title: str, description: str, height: int, body: str, *, animated: bool = False) -> str:
+    animation = """
+      .light { animation: ignite 4.8s ease-in-out infinite; }
+      .l1 { animation-delay: 0s; } .l2 { animation-delay: .28s; }
+      .l3 { animation-delay: .56s; } .l4 { animation-delay: .84s; }
+      .l5 { animation-delay: 1.12s; }
+      .trace { stroke-dasharray: 1250; animation: trace 3.2s cubic-bezier(.2,.8,.2,1) both; }
+      .pulse { animation: pulse 2.3s ease-in-out infinite; }
+      @keyframes ignite {
+        0%, 8% { fill: #28101A; filter: none; }
+        14%, 52% { fill: #FF254A; filter: url(#redGlow); }
+        60%, 100% { fill: #28101A; filter: none; }
       }
-    """ if animate else ""
+      @keyframes trace { from { stroke-dashoffset: 1250; } to { stroke-dashoffset: 0; } }
+      @keyframes pulse { 0%, 100% { opacity: .35; } 50% { opacity: 1; } }
+      @media (prefers-reduced-motion: reduce) {
+        .light { animation: none; fill: #FF254A; }
+        .trace, .pulse { animation: none; stroke-dashoffset: 0; opacity: 1; }
+      }
+    """ if animated else ""
     return f"""<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="{height}" viewBox="0 0 1200 {height}" role="img" aria-labelledby="title desc">
   <title id="title">{title}</title>
   <desc id="desc">{description}</desc>
   <defs>
-    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
-      <path d="M32 0H0V32" fill="none" stroke="{p['grid']}" stroke-width="1"/>
-    </pattern>
-    <linearGradient id="signalFade" x1="0" x2="1">
-      <stop offset="0" stop-color="{p['signal']}"/>
-      <stop offset=".58" stop-color="{p['signal2']}"/>
-      <stop offset="1" stop-color="{p['decision']}"/>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="{C['carbon']}"/>
+      <stop offset=".58" stop-color="{C['cockpit']}"/>
+      <stop offset="1" stop-color="#17070C"/>
     </linearGradient>
+    <linearGradient id="signal" x1="0" x2="1">
+      <stop offset="0" stop-color="{C['red']}"/>
+      <stop offset=".48" stop-color="{C['violet']}"/>
+      <stop offset="1" stop-color="{C['cyan']}"/>
+    </linearGradient>
+    <pattern id="grid" width="38" height="38" patternUnits="userSpaceOnUse">
+      <path d="M38 0H0V38" fill="none" stroke="{C['grid']}" stroke-width="1"/>
+    </pattern>
+    <pattern id="checks" width="24" height="24" patternUnits="userSpaceOnUse">
+      <rect width="12" height="12" fill="{C['white']}"/><rect x="12" y="12" width="12" height="12" fill="{C['white']}"/>
+    </pattern>
+    <filter id="redGlow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="7" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="cyanGlow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
     <style>
-      .display {{ font-family: "Arial Narrow", "Avenir Next Condensed", "Roboto Condensed", sans-serif; font-weight: 850; letter-spacing: -1.8px; }}
+      .display {{ font-family: "Arial Narrow", "Avenir Next Condensed", Impact, sans-serif; font-weight: 900; font-stretch: condensed; letter-spacing: -1.4px; }}
       .body {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }}
-      .mono {{ font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: 1.5px; }}
-      {motion}
+      .mono {{ font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: 1.25px; }}
+      {animation}
     </style>
   </defs>
-  <rect width="1200" height="{height}" rx="32" fill="{p['bg']}"/>
-  <rect x="18" y="18" width="1164" height="{height - 36}" rx="22" fill="url(#grid)" opacity=".78"/>
-  <rect x="18.5" y="18.5" width="1163" height="{height - 37}" rx="22" fill="none" stroke="{p['line']}"/>
+  <rect width="1200" height="{height}" rx="28" fill="url(#bg)"/>
+  <rect x="1" y="1" width="1198" height="{height - 2}" rx="27" fill="none" stroke="{C['line']}" stroke-width="2"/>
+  <rect x="20" y="20" width="1160" height="{height - 40}" rx="18" fill="url(#grid)" opacity=".72"/>
   {body}
 </svg>
 """
 
 
-def hero(p: dict[str, str]) -> str:
+def hero() -> str:
     body = f"""
-  <path d="M40 78H52V132H40" fill="none" stroke="{p['decision']}" stroke-width="7"/>
-  <text x="72" y="82" class="mono" font-size="15" font-weight="750" fill="{p['signal']}">ENGINEERING FLIGHT RECORDER / YAM-PROFILE</text>
-  <text x="1128" y="82" class="mono" font-size="14" text-anchor="end" fill="{p['muted']}">GUJARAT · INDIA</text>
+  <path d="M0 94H1200" stroke="{C['red']}" stroke-width="2" opacity=".85"/>
+  <path d="M0 100H1200" stroke="{C['cyan']}" stroke-width="1" opacity=".18"/>
+  <path d="M0 0H176L125 94H0Z" fill="url(#checks)" opacity=".13"/>
+  <path d="M1200 600H1004L1064 506H1200Z" fill="url(#checks)" opacity=".08"/>
 
-  <text x="72" y="168" class="display" font-size="69" fill="{p['ink']}">YASH</text>
-  <text x="72" y="236" class="display" font-size="69" fill="{p['ink']}">ABHICHANDANI</text>
-  <text x="76" y="282" class="body" font-size="27" font-weight="680" fill="{p['muted']}">I audit the assumption. Then I build the system.</text>
-  <rect x="76" y="307" width="470" height="38" rx="19" fill="{p['panel']}"/>
-  <text x="96" y="332" class="mono" font-size="13" font-weight="750" fill="{p['signal']}">COMPUTER ENGINEERING × DATA SCIENCE</text>
+  <text x="54" y="57" class="mono" font-size="13" font-weight="800" fill="{C['cyan']}">PROFILE TELEMETRY / ONLINE</text>
+  <circle cx="32" cy="52" r="5" fill="{C['green']}" class="pulse"/>
+  <text x="708" y="57" text-anchor="end" class="mono" font-size="12" fill="{C['muted']}">GUJARAT, INDIA · UTC+05:30</text>
 
-  <g transform="translate(878 196)">
-    <circle r="134" fill="{p['panel']}" stroke="{p['line']}" stroke-width="2"/>
-    <circle r="108" fill="none" stroke="{p['grid']}" stroke-width="1"/>
-    <circle r="82" fill="none" stroke="{p['signal']}" stroke-width="2" stroke-dasharray="3 10"/>
-    <path class="scan" d="M0 0L76-64A100 100 0 0 1 99 14Z" fill="{p['signal']}" opacity=".25"/>
-    <path d="M-104 4A104 104 0 0 1 66-81" fill="none" stroke="url(#signalFade)" stroke-width="8" stroke-linecap="round"/>
-    <circle cx="-104" cy="4" r="8" fill="{p['decision']}"/>
-    <circle cx="66" cy="-81" r="8" fill="{p['verify']}"/>
-    <text y="-5" class="display" font-size="59" text-anchor="middle" fill="{p['ink']}">Y/A</text>
-    <text y="28" class="mono" font-size="12" font-weight="750" text-anchor="middle" fill="{p['muted']}">SYSTEMS / ML / PRODUCT</text>
+  <g transform="translate(760 32)">
+    <rect width="378" height="48" rx="24" fill="{C['carbon']}" stroke="{C['line']}"/>
+    <g transform="translate(33 24)"><circle class="light l1" r="10" fill="#28101A"/></g>
+    <g transform="translate(77 24)"><circle class="light l2" r="10" fill="#28101A"/></g>
+    <g transform="translate(121 24)"><circle class="light l3" r="10" fill="#28101A"/></g>
+    <g transform="translate(165 24)"><circle class="light l4" r="10" fill="#28101A"/></g>
+    <g transform="translate(209 24)"><circle class="light l5" r="10" fill="#28101A"/></g>
+    <text x="353" y="29" text-anchor="end" class="mono" font-size="10" font-weight="800" fill="{C['muted']}">READY / 05</text>
   </g>
 
-  <g transform="translate(1026 137)">
-    <rect width="102" height="42" rx="8" fill="{p['panel2']}"/>
-    <text x="12" y="17" class="mono" font-size="9" fill="{p['muted']}">MODE</text>
-    <text x="12" y="33" class="mono" font-size="12" font-weight="800" fill="{p['verify']}">BUILD</text>
-  </g>
-  <g transform="translate(1026 188)">
-    <rect width="102" height="42" rx="8" fill="{p['panel2']}"/>
-    <text x="12" y="17" class="mono" font-size="9" fill="{p['muted']}">METHOD</text>
-    <text x="12" y="33" class="mono" font-size="12" font-weight="800" fill="{p['signal']}">VERIFY</text>
-  </g>
-  <g transform="translate(1026 239)">
-    <rect width="102" height="42" rx="8" fill="{p['panel2']}"/>
-    <text x="12" y="17" class="mono" font-size="9" fill="{p['muted']}">STATUS</text>
-    <text x="12" y="33" class="mono" font-size="12" font-weight="800" fill="{p['decision']}">CURIOUS</text>
+  <text x="54" y="145" class="mono" font-size="13" font-weight="800" fill="{C['red']}">CALLSIGN / CODEDRIFTER_2507</text>
+  <text x="50" y="229" class="display" font-size="88" fill="{C['white']}">LIGHTS OUT.</text>
+  <text x="50" y="313" class="display" font-size="88" fill="{C['red']}">SYSTEMS ON.</text>
+  <text x="55" y="365" class="body" font-size="25" font-weight="650" fill="{C['white']}">Yash Abhichandani</text>
+  <text x="55" y="398" class="body" font-size="18" fill="{C['muted']}">Computer Engineering × Data Science</text>
+
+  <g transform="translate(56 431)">
+    <rect width="152" height="34" rx="17" fill="{C['panel2']}" stroke="{C['red']}"/>
+    <text x="76" y="22" text-anchor="middle" class="mono" font-size="10" font-weight="800" fill="{C['white']}">FULL-STACK</text>
+    <rect x="164" width="146" height="34" rx="17" fill="{C['panel2']}" stroke="{C['cyan']}"/>
+    <text x="237" y="22" text-anchor="middle" class="mono" font-size="10" font-weight="800" fill="{C['white']}">APPLIED ML</text>
+    <rect x="322" width="182" height="34" rx="17" fill="{C['panel2']}" stroke="{C['violet']}"/>
+    <text x="413" y="22" text-anchor="middle" class="mono" font-size="10" font-weight="800" fill="{C['white']}">AGENTIC SYSTEMS</text>
   </g>
 
-  <path d="M72 421H226L262 387H417L460 431H622L670 374H828L873 416H1128" fill="none" stroke="{p['line']}" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-  <path class="draw" d="M72 421H226L262 387H417L460 431H622L670 374H828L873 416H1128" fill="none" stroke="url(#signalFade)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <g transform="translate(690 128)">
+    <path d="M103 31C34 68 8 151 54 214C89 262 161 259 204 224C256 181 310 205 350 159C401 99 353 34 288 27C230 21 171-5 103 31Z" fill="none" stroke="{C['line']}" stroke-width="13"/>
+    <path class="trace" d="M103 31C34 68 8 151 54 214C89 262 161 259 204 224C256 181 310 205 350 159C401 99 353 34 288 27C230 21 171-5 103 31Z" fill="none" stroke="url(#signal)" stroke-width="4"/>
+    <circle cx="103" cy="31" r="9" fill="{C['red']}" filter="url(#redGlow)"/>
+    <circle cx="350" cy="159" r="7" fill="{C['cyan']}" filter="url(#cyanGlow)"/>
+    <text x="204" y="115" text-anchor="middle" class="display" font-size="46" fill="{C['white']}">Y/A</text>
+    <text x="204" y="142" text-anchor="middle" class="mono" font-size="10" fill="{C['muted']}">BUILD / TRACE / VERIFY</text>
+  </g>
 
-  <g class="arrive a1"><circle cx="112" cy="421" r="9" fill="{p['bg']}" stroke="{p['signal']}" stroke-width="4"/><text x="112" y="470" class="mono" font-size="12" font-weight="800" text-anchor="middle" fill="{p['muted']}">OBSERVE</text></g>
-  <g class="arrive a2"><circle cx="307" cy="387" r="9" fill="{p['bg']}" stroke="{p['signal']}" stroke-width="4"/><text x="307" y="470" class="mono" font-size="12" font-weight="800" text-anchor="middle" fill="{p['muted']}">QUESTION</text></g>
-  <g class="arrive a3"><circle cx="536" cy="431" r="10" fill="{p['decision']}" stroke="{p['bg']}" stroke-width="4"/><text x="536" y="470" class="mono" font-size="12" font-weight="850" text-anchor="middle" fill="{p['decision']}">DECIDE</text></g>
-  <g class="arrive a4"><circle cx="748" cy="374" r="9" fill="{p['bg']}" stroke="{p['signal2']}" stroke-width="4"/><text x="748" y="470" class="mono" font-size="12" font-weight="800" text-anchor="middle" fill="{p['muted']}">BUILD</text></g>
-  <g class="arrive a5"><circle cx="1011" cy="416" r="10" fill="{p['verify']}" stroke="{p['bg']}" stroke-width="4"/><text x="1011" y="470" class="mono" font-size="12" font-weight="850" text-anchor="middle" fill="{p['verify']}">VERIFY</text></g>
-  <text x="1128" y="510" class="mono" font-size="10" text-anchor="end" fill="{p['muted']}">THE DECISION IS PART OF THE DELIVERABLE</text>
+  <path d="M690 431H1142" stroke="{C['line']}" stroke-width="2"/>
+  <g transform="translate(690 454)">
+    <text y="0" class="mono" font-size="10" fill="{C['muted']}">CURRENT MODE</text>
+    <text y="27" class="display" font-size="24" fill="{C['green']}">SHIP WITH PROOF</text>
+    <text x="235" y="0" class="mono" font-size="10" fill="{C['muted']}">FUEL</text>
+    <text x="235" y="27" class="display" font-size="24" fill="{C['yellow']}">CURIOSITY</text>
+  </g>
+
+  <rect x="50" y="516" width="1092" height="48" rx="8" fill="{C['panel']}" stroke="{C['line']}"/>
+  <text x="72" y="547" class="mono" font-size="13" font-weight="850" fill="{C['white']}">I BUILD FAST. <tspan fill="{C['red']}">I REFUSE TO SHIP BLIND.</tspan></text>
+  <text x="1120" y="547" text-anchor="end" class="mono" font-size="10" fill="{C['muted']}">SCROLL FOR RACE DATA ↓</text>
 """
-    return shell(
-        "Yash Abhichandani — Engineering Flight Recorder",
-        "I audit the assumption, then I build the system. Computer Engineering and Data Science.",
-        540,
-        p,
+    return frame(
+        "Lights out. Systems on. Yash Abhichandani.",
+        "A motorsport engineering profile for Yash Abhichandani, also known as CodeDrifter 2507. Full-stack systems, applied machine learning, and agentic workflows.",
+        600,
         body,
-        animate=True,
+        animated=True,
     )
 
 
-def principles(p: dict[str, str]) -> str:
+def strategy() -> str:
     body = f"""
-  <text x="58" y="65" class="mono" font-size="14" font-weight="800" fill="{p['signal']}">OPERATING SYSTEM / FOUR NON-NEGOTIABLES</text>
-  <text x="1142" y="65" class="mono" font-size="12" text-anchor="end" fill="{p['muted']}">PROOF &gt; THEATRE</text>
-  <path d="M58 88H1142" stroke="{p['line']}" stroke-width="2"/>
+  <text x="48" y="52" class="mono" font-size="12" font-weight="800" fill="{C['red']}">RACE STRATEGY / HOW I BUILD</text>
+  <text x="48" y="111" class="display" font-size="48" fill="{C['white']}">NO VANITY LAPS.</text>
+  <text x="48" y="147" class="body" font-size="16" fill="{C['muted']}">Speed matters. So do the systems that keep the result honest when pressure arrives.</text>
 
-  <g transform="translate(58 112)">
-    <rect width="252" height="105" rx="15" fill="{p['panel']}"/>
-    <text x="20" y="36" class="mono" font-size="12" font-weight="800" fill="{p['decision']}">01 / DATA</text>
-    <text x="20" y="72" class="display" font-size="28" fill="{p['ink']}">BEFORE MODEL</text>
+  <g transform="translate(48 191)">
+    <path d="M0 0H1088" stroke="{C['line']}" stroke-width="8" stroke-linecap="round"/>
+    <path d="M0 0H1088" stroke="url(#signal)" stroke-width="3" stroke-linecap="round"/>
+    <g transform="translate(40)"><circle r="10" fill="{C['red']}"/><text y="39" text-anchor="middle" class="mono" font-size="10" font-weight="800" fill="{C['white']}">AUDIT DATA</text></g>
+    <g transform="translate(310)"><circle r="10" fill="{C['yellow']}"/><text y="39" text-anchor="middle" class="mono" font-size="10" font-weight="800" fill="{C['white']}">DESIGN CONTRACTS</text></g>
+    <g transform="translate(590)"><circle r="10" fill="{C['violet']}"/><text y="39" text-anchor="middle" class="mono" font-size="10" font-weight="800" fill="{C['white']}">BUILD FALLBACKS</text></g>
+    <g transform="translate(850)"><circle r="10" fill="{C['cyan']}"/><text y="39" text-anchor="middle" class="mono" font-size="10" font-weight="800" fill="{C['white']}">TEST JOURNEYS</text></g>
+    <g transform="translate(1060)"><circle r="10" fill="{C['green']}"/><text y="39" text-anchor="end" class="mono" font-size="10" font-weight="800" fill="{C['white']}">SHIP PROOF</text></g>
   </g>
-  <g transform="translate(326 112)">
-    <rect width="252" height="105" rx="15" fill="{p['panel']}"/>
-    <text x="20" y="36" class="mono" font-size="12" font-weight="800" fill="{p['signal']}">02 / CONTRACTS</text>
-    <text x="20" y="72" class="display" font-size="28" fill="{p['ink']}">BEFORE SCREENS</text>
-  </g>
-  <g transform="translate(594 112)">
-    <rect width="252" height="105" rx="15" fill="{p['panel']}"/>
-    <text x="20" y="36" class="mono" font-size="12" font-weight="800" fill="{p['signal2']}">03 / FALLBACKS</text>
-    <text x="20" y="72" class="display" font-size="28" fill="{p['ink']}">BEFORE DEMOS</text>
-  </g>
-  <g transform="translate(862 112)">
-    <rect width="280" height="105" rx="15" fill="{p['panel']}"/>
-    <text x="20" y="36" class="mono" font-size="12" font-weight="800" fill="{p['verify']}">04 / EVIDENCE</text>
-    <text x="20" y="72" class="display" font-size="28" fill="{p['ink']}">BEFORE CLAIMS</text>
-  </g>
-  <path d="M80 236H1120" stroke="url(#signalFade)" stroke-width="5" stroke-linecap="round"/>
 """
-    return shell(
-        "Operating system — four non-negotiables",
-        "Data before model, contracts before screens, fallbacks before demos, evidence before claims.",
+    return frame(
+        "Race strategy — no vanity laps",
+        "Yash's engineering loop: audit data, design contracts, build fallbacks, test real journeys, and ship evidence.",
+        260,
+        body,
+    )
+
+
+def sector_turnout() -> str:
+    body = f"""
+  <text x="48" y="50" class="mono" font-size="12" font-weight="850" fill="{C['red']}">SECTOR 01 / MODEL INTEGRITY</text>
+  <text x="48" y="108" class="display" font-size="45" fill="{C['white']}">THE PERFECT SCORE WAS A <tspan fill="{C['red']}">RED FLAG.</tspan></text>
+  <text x="48" y="144" class="body" font-size="16" fill="{C['muted']}">Turnout Lab found the benchmark leak before the model could exploit it.</text>
+  <g transform="translate(48 178)">
+    <rect width="248" height="74" rx="12" fill="{C['panel2']}" stroke="{C['line']}"/>
+    <text x="18" y="30" class="display" font-size="28" fill="{C['red']}">100 / 100</text><text x="18" y="54" class="mono" font-size="9" fill="{C['muted']}">TEST ROWS OVERLAPPED</text>
+    <rect x="264" width="190" height="74" rx="12" fill="{C['panel2']}" stroke="{C['line']}"/>
+    <text x="282" y="30" class="display" font-size="28" fill="{C['white']}">397</text><text x="282" y="54" class="mono" font-size="9" fill="{C['muted']}">LEAKAGE-SAFE ROWS</text>
+    <rect x="470" width="190" height="74" rx="12" fill="{C['panel2']}" stroke="{C['line']}"/>
+    <text x="488" y="30" class="display" font-size="28" fill="{C['cyan']}">25</text><text x="488" y="54" class="mono" font-size="9" fill="{C['muted']}">OUTER CV FOLDS</text>
+    <rect x="676" width="190" height="74" rx="12" fill="{C['panel2']}" stroke="{C['line']}"/>
+    <text x="694" y="30" class="display" font-size="28" fill="{C['white']}">0.635</text><text x="694" y="54" class="mono" font-size="9" fill="{C['muted']}">ROC-AUC</text>
+    <rect x="882" width="206" height="74" rx="12" fill="{C['panel2']}" stroke="{C['line']}"/>
+    <text x="900" y="30" class="display" font-size="28" fill="{C['green']}">+5.1%</text><text x="900" y="54" class="mono" font-size="9" fill="{C['muted']}">BRIER SKILL</text>
+  </g>
+"""
+    return frame(
+        "Sector 01 — Turnout Lab",
+        "The perfect score was a red flag. Turnout Lab quarantined 100 overlapping test records and reported leakage-safe grouped evaluation across 25 outer folds.",
+        292,
+        body,
+    )
+
+
+def sector_globe() -> str:
+    body = f"""
+  <text x="48" y="50" class="mono" font-size="12" font-weight="850" fill="{C['cyan']}">SECTOR 02 / PRODUCT RESILIENCE</text>
+  <text x="48" y="108" class="display" font-size="43" fill="{C['white']}">THE DEMO DOESN'T BREAK WHEN <tspan fill="{C['cyan']}">THE API DOES.</tspan></text>
+  <text x="48" y="144" class="body" font-size="16" fill="{C['muted']}">GlobeTrotter keeps the planning journey alive with durable data, keyless maps, and deliberate fallbacks.</text>
+  <g transform="translate(48 178)">
+    <rect width="220" height="74" rx="12" fill="{C['panel2']}" stroke="{C['line']}"/>
+    <text x="18" y="30" class="display" font-size="28" fill="{C['cyan']}">55</text><text x="18" y="54" class="mono" font-size="9" fill="{C['muted']}">DESTINATION DOSSIERS</text>
+    <rect x="236" width="220" height="74" rx="12" fill="{C['panel2']}" stroke="{C['line']}"/>
+    <text x="254" y="30" class="display" font-size="28" fill="{C['violet']}">390</text><text x="254" y="54" class="mono" font-size="9" fill="{C['muted']}">CURATED ACTIVITIES</text>
+    <rect x="472" width="180" height="74" rx="12" fill="{C['panel2']}" stroke="{C['line']}"/>
+    <text x="490" y="30" class="display" font-size="28" fill="{C['yellow']}">3</text><text x="490" y="54" class="mono" font-size="9" fill="{C['muted']}">NAV LANGUAGES</text>
+    <rect x="668" width="420" height="74" rx="12" fill="{C['panel2']}" stroke="{C['line']}"/>
+    <text x="686" y="30" class="display" font-size="25" fill="{C['green']}">ZERO REQUIRED PAID KEYS</text><text x="686" y="54" class="mono" font-size="9" fill="{C['muted']}">CORE JOURNEY REMAINS DEMONSTRABLE</text>
+  </g>
+"""
+    return frame(
+        "Sector 02 — GlobeTrotter",
+        "The demo does not break when the API does. GlobeTrotter provides 55 destination dossiers, 390 activities, three navigation languages, and no required paid API keys.",
+        292,
+        body,
+    )
+
+
+def paddock() -> str:
+    body = f"""
+  <text x="48" y="50" class="mono" font-size="12" font-weight="850" fill="{C['violet']}">PADDOCK / SELECTED BUILDS</text>
+  <text x="48" y="108" class="display" font-size="44" fill="{C['white']}">DIFFERENT SYSTEMS. SAME STANDARD.</text>
+  <text x="48" y="142" class="body" font-size="16" fill="{C['muted']}">Every project below has a different failure mode—and a public trail you can inspect.</text>
+  <g transform="translate(48 174)">
+    <rect width="258" height="58" rx="10" fill="{C['panel2']}" stroke="{C['red']}"/><text x="18" y="25" class="display" font-size="19" fill="{C['white']}">F1 APEX</text><text x="18" y="44" class="mono" font-size="8" fill="{C['muted']}">MOTORSPORT PRODUCT</text>
+    <rect x="276" width="258" height="58" rx="10" fill="{C['panel2']}" stroke="{C['cyan']}"/><text x="294" y="25" class="display" font-size="19" fill="{C['white']}">PRISM IEMS</text><text x="294" y="44" class="mono" font-size="8" fill="{C['muted']}">AGENTIC INSTITUTION OPS</text>
+    <rect x="552" width="258" height="58" rx="10" fill="{C['panel2']}" stroke="{C['yellow']}"/><text x="570" y="25" class="display" font-size="19" fill="{C['white']}">COSMIC LENS</text><text x="570" y="44" class="mono" font-size="8" fill="{C['muted']}">SCIENTIFIC EXPLORATION</text>
+    <rect x="828" width="260" height="58" rx="10" fill="{C['panel2']}" stroke="{C['green']}"/><text x="846" y="25" class="display" font-size="19" fill="{C['white']}">PHARMAGUARD / BEOS+</text><text x="846" y="44" class="mono" font-size="8" fill="{C['muted']}">PUBLIC-IMPACT SYSTEMS</text>
+  </g>
+"""
+    return frame(
+        "The paddock — selected builds",
+        "Selected systems across motorsport, agentic institution operations, scientific exploration, pharmacy operations, and blood emergency coordination.",
         270,
-        p,
         body,
     )
 
 
-def turnout(p: dict[str, str]) -> str:
+def pit_crew() -> str:
     body = f"""
-  <text x="58" y="65" class="mono" font-size="14" font-weight="800" fill="{p['decision']}">FEATURED TRACE / 01 / APPLIED ML</text>
-  <text x="58" y="123" class="display" font-size="50" fill="{p['ink']}">TURNOUT LAB</text>
-  <text x="58" y="169" class="display" font-size="35" fill="{p['decision']}">WHEN THE BENCHMARK WAS THE BUG.</text>
-
-  <g transform="translate(58 207)">
-    <rect width="630" height="142" rx="18" fill="{p['panel']}"/>
-    <path d="M42 71H142M190 71H290M338 71H438M486 71H586" stroke="{p['line']}" stroke-width="5" stroke-linecap="round"/>
-    <g transform="translate(42 36)"><circle cx="0" cy="35" r="18" fill="{p['decision']}"/><text x="0" y="41" class="mono" font-size="12" font-weight="900" text-anchor="middle" fill="{p['white']}">!</text><text x="0" y="105" class="mono" font-size="11" font-weight="800" text-anchor="start" fill="{p['muted']}">OVERLAP</text></g>
-    <g transform="translate(190 36)"><circle cx="0" cy="35" r="18" fill="{p['bg']}" stroke="{p['signal']}" stroke-width="4"/><text x="0" y="41" class="mono" font-size="11" font-weight="900" text-anchor="middle" fill="{p['signal']}">Q</text><text x="0" y="105" class="mono" font-size="11" font-weight="800" text-anchor="start" fill="{p['muted']}">QUARANTINE</text></g>
-    <g transform="translate(338 36)"><circle cx="0" cy="35" r="18" fill="{p['bg']}" stroke="{p['signal2']}" stroke-width="4"/><text x="0" y="41" class="mono" font-size="10" font-weight="900" text-anchor="middle" fill="{p['signal2']}">CV</text><text x="0" y="105" class="mono" font-size="11" font-weight="800" text-anchor="start" fill="{p['muted']}">GROUPED OOF</text></g>
-    <g transform="translate(486 36)"><circle cx="0" cy="35" r="18" fill="{p['verify']}"/><text x="0" y="41" class="mono" font-size="11" font-weight="900" text-anchor="middle" fill="{p['white']}">✓</text><text x="0" y="105" class="mono" font-size="11" font-weight="800" text-anchor="start" fill="{p['muted']}">CALIBRATE</text></g>
+  <text x="48" y="50" class="mono" font-size="12" font-weight="850" fill="{C['yellow']}">PIT CREW / TECHNOLOGY UNDER THE BODYWORK</text>
+  <text x="48" y="103" class="display" font-size="39" fill="{C['white']}">TOOLS CHANGE. THE ENGINEERING LOOP DOESN'T.</text>
+  <g transform="translate(48 140)">
+    <rect width="252" height="136" rx="14" fill="{C['panel2']}" stroke="{C['red']}"/>
+    <text x="18" y="29" class="mono" font-size="10" font-weight="850" fill="{C['red']}">01 / PRODUCT</text>
+    <text x="18" y="61" class="display" font-size="21" fill="{C['white']}">TYPESCRIPT · REACT</text><text x="18" y="86" class="display" font-size="21" fill="{C['white']}">NEXT.JS · PRISMA</text><text x="18" y="113" class="mono" font-size="9" fill="{C['muted']}">AUTH · STATE · PERSISTENCE</text>
+    <rect x="270" width="252" height="136" rx="14" fill="{C['panel2']}" stroke="{C['cyan']}"/>
+    <text x="288" y="29" class="mono" font-size="10" font-weight="850" fill="{C['cyan']}">02 / INTELLIGENCE</text>
+    <text x="288" y="61" class="display" font-size="21" fill="{C['white']}">PYTHON · SCIKIT</text><text x="288" y="86" class="display" font-size="21" fill="{C['white']}">LANGGRAPH · RAG</text><text x="288" y="113" class="mono" font-size="9" fill="{C['muted']}">CALIBRATION · EVALUATION</text>
+    <rect x="540" width="252" height="136" rx="14" fill="{C['panel2']}" stroke="{C['violet']}"/>
+    <text x="558" y="29" class="mono" font-size="10" font-weight="850" fill="{C['violet']}">03 / DATA</text>
+    <text x="558" y="61" class="display" font-size="21" fill="{C['white']}">POSTGRES · SQLITE</text><text x="558" y="86" class="display" font-size="21" fill="{C['white']}">SUPABASE · TURSO</text><text x="558" y="113" class="mono" font-size="9" fill="{C['muted']}">SCHEMAS · MIGRATIONS · AUDIT</text>
+    <rect x="810" width="278" height="136" rx="14" fill="{C['panel2']}" stroke="{C['green']}"/>
+    <text x="828" y="29" class="mono" font-size="10" font-weight="850" fill="{C['green']}">04 / DELIVERY</text>
+    <text x="828" y="61" class="display" font-size="21" fill="{C['white']}">GIT · CI · VERCEL</text><text x="828" y="86" class="display" font-size="21" fill="{C['white']}">DOCKER · BROWSER QA</text><text x="828" y="113" class="mono" font-size="9" fill="{C['muted']}">REPRODUCIBLE · TESTED · SHIPPED</text>
   </g>
-
-  <g transform="translate(720 52)">
-    <rect width="422" height="297" rx="20" fill="{p['panel2']}"/>
-    <text x="24" y="38" class="mono" font-size="12" font-weight="800" fill="{p['muted']}">RECORDED EVIDENCE</text>
-    <text x="24" y="102" class="display" font-size="49" fill="{p['decision']}">100 / 100</text>
-    <text x="26" y="128" class="mono" font-size="11" font-weight="750" fill="{p['muted']}">TEST RECORDS OVERLAPPED TRAINING</text>
-    <path d="M24 150H398" stroke="{p['line']}" stroke-width="2"/>
-    <text x="24" y="203" class="display" font-size="38" fill="{p['signal']}">25</text>
-    <text x="90" y="202" class="mono" font-size="12" font-weight="750" fill="{p['muted']}">OUTER FOLDS</text>
-    <text x="24" y="254" class="display" font-size="32" fill="{p['ink']}">0.635</text>
-    <text x="144" y="253" class="mono" font-size="11" fill="{p['muted']}">ROC-AUC</text>
-    <text x="248" y="254" class="display" font-size="32" fill="{p['ink']}">0.221</text>
-    <text x="358" y="253" class="mono" font-size="11" fill="{p['muted']}">BRIER</text>
-    <rect x="24" y="270" width="374" height="5" rx="2.5" fill="url(#signalFade)"/>
-  </g>
-
-  <text x="58" y="391" class="mono" font-size="13" font-weight="850" fill="{p['verify']}">HONEST SIGNAL &gt; PERFECT STORY</text>
-  <text x="1142" y="391" class="mono" font-size="12" font-weight="750" text-anchor="end" fill="{p['muted']}">OPEN CASE FILE →</text>
+  <text x="48" y="318" class="mono" font-size="10" fill="{C['muted']}">NO PERCENTAGE BARS. FOLLOW THE CODE, TESTS, ARTIFACTS, AND LIVE JOURNEYS.</text>
 """
-    return shell(
-        "Turnout Lab — when the benchmark was the bug",
-        "100 of 100 test records overlapped training. The response was quarantine, grouped validation, and calibrated evaluation across 25 outer folds.",
-        430,
-        p,
+    return frame(
+        "Pit crew — technology under the bodywork",
+        "A capability map across product engineering, intelligent systems, data, and delivery. Claims point to inspectable code and live systems instead of skill percentages.",
+        350,
         body,
     )
 
 
-def globe(p: dict[str, str]) -> str:
+def radio() -> str:
     body = f"""
-  <text x="58" y="65" class="mono" font-size="14" font-weight="800" fill="{p['signal']}">FEATURED TRACE / 02 / FULL-STACK PRODUCT</text>
-  <text x="58" y="123" class="display" font-size="50" fill="{p['ink']}">GLOBETROTTER</text>
-  <text x="58" y="169" class="display" font-size="35" fill="{p['signal']}">A TRAVEL PRODUCT THAT SURVIVES THE DEMO.</text>
-
-  <g transform="translate(58 212)">
-    <path d="M14 70H163L205 25H363L410 94H567L620 47H768" fill="none" stroke="{p['line']}" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M14 70H163L205 25H363L410 94H567L620 47H768" fill="none" stroke="url(#signalFade)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-    <g><circle cx="14" cy="70" r="10" fill="{p['decision']}"/><text x="14" y="132" class="mono" font-size="11" font-weight="800" text-anchor="middle" fill="{p['muted']}">IDEA</text></g>
-    <g><circle cx="205" cy="25" r="10" fill="{p['bg']}" stroke="{p['signal']}" stroke-width="4"/><text x="205" y="132" class="mono" font-size="11" font-weight="800" text-anchor="middle" fill="{p['muted']}">PLAN</text></g>
-    <g><circle cx="410" cy="94" r="10" fill="{p['bg']}" stroke="{p['signal2']}" stroke-width="4"/><text x="410" y="132" class="mono" font-size="11" font-weight="800" text-anchor="middle" fill="{p['muted']}">COLLABORATE</text></g>
-    <g><circle cx="620" cy="47" r="10" fill="{p['verify']}"/><text x="620" y="132" class="mono" font-size="11" font-weight="800" text-anchor="middle" fill="{p['muted']}">PUBLISH</text></g>
-    <g><circle cx="768" cy="47" r="10" fill="{p['signal']}"/><text x="768" y="132" class="mono" font-size="11" font-weight="800" text-anchor="middle" fill="{p['muted']}">COPY</text></g>
-  </g>
-
-  <g transform="translate(862 66)">
-    <rect width="280" height="270" rx="20" fill="{p['panel2']}"/>
-    <text x="24" y="38" class="mono" font-size="12" font-weight="800" fill="{p['muted']}">PRODUCT PAYLOAD</text>
-    <text x="24" y="102" class="display" font-size="49" fill="{p['signal']}">55</text>
-    <text x="100" y="100" class="mono" font-size="12" font-weight="750" fill="{p['muted']}">DESTINATIONS</text>
-    <text x="24" y="163" class="display" font-size="49" fill="{p['signal2']}">390</text>
-    <text x="125" y="161" class="mono" font-size="12" font-weight="750" fill="{p['muted']}">ACTIVITIES</text>
-    <text x="24" y="218" class="display" font-size="34" fill="{p['verify']}">3</text>
-    <text x="66" y="216" class="mono" font-size="12" font-weight="750" fill="{p['muted']}">NAV LANGUAGES</text>
-    <rect x="24" y="234" width="232" height="5" rx="2.5" fill="url(#signalFade)"/>
-  </g>
-
-  <rect x="58" y="358" width="498" height="40" rx="20" fill="{p['panel']}"/>
-  <text x="82" y="383" class="mono" font-size="12" font-weight="850" fill="{p['verify']}">NO REQUIRED PAID API KEYS / CORE JOURNEY PERSISTS</text>
-  <text x="1142" y="383" class="mono" font-size="12" font-weight="750" text-anchor="end" fill="{p['muted']}">LAUNCH WORKSPACE →</text>
+  <path d="M48 46H60V196H48" fill="none" stroke="{C['red']}" stroke-width="7"/>
+  <circle cx="93" cy="59" r="6" fill="{C['green']}" class="pulse"/>
+  <text x="112" y="64" class="mono" font-size="12" font-weight="850" fill="{C['green']}">TEAM RADIO / CHANNEL OPEN</text>
+  <text x="80" y="123" class="display" font-size="42" fill="{C['white']}">BRING THE AMBITIOUS IDEA.</text>
+  <text x="80" y="166" class="display" font-size="42" fill="{C['red']}">I'LL BRING THE SYSTEM QUESTIONS.</text>
+  <text x="80" y="208" class="mono" font-size="10" fill="{C['muted']}">BUILT UNDER PRESSURE · EXPLAINED AFTER THE CHEQUERED FLAG</text>
+  <path d="M820 197H1140" stroke="url(#signal)" stroke-width="4"/>
 """
-    return shell(
-        "GlobeTrotter — a travel product that survives the demo",
-        "A persistent collaborative travel workspace with 55 destinations, 390 activities, three navigation languages, keyless maps, and no required paid API keys.",
-        430,
-        p,
+    return frame(
+        "Team radio — channel open",
+        "Bring the ambitious idea. I will bring the system questions. Built under pressure and explained after the chequered flag.",
+        240,
         body,
-    )
-
-
-def circuit(p: dict[str, str]) -> str:
-    body = f"""
-  <text x="58" y="65" class="mono" font-size="14" font-weight="800" fill="{p['signal2']}">BUILD CIRCUIT / SYSTEMS WITH DIFFERENT FAILURE MODES</text>
-  <text x="1142" y="65" class="mono" font-size="12" text-anchor="end" fill="{p['muted']}">NO SKILL BARS. FOLLOW THE EVIDENCE.</text>
-
-  <path d="M189 151C96 201 104 348 222 400C370 465 474 361 582 390C728 429 805 484 973 399C1105 332 1088 182 961 140C828 96 734 180 608 147C454 106 318 81 189 151Z" fill="none" stroke="{p['line']}" stroke-width="15" stroke-linecap="round"/>
-  <path d="M189 151C96 201 104 348 222 400C370 465 474 361 582 390C728 429 805 484 973 399C1105 332 1088 182 961 140C828 96 734 180 608 147C454 106 318 81 189 151Z" fill="none" stroke="url(#signalFade)" stroke-width="5" stroke-linecap="round" stroke-dasharray="5 12"/>
-
-  <g transform="translate(600 281)">
-    <circle r="104" fill="{p['panel2']}" stroke="{p['signal']}" stroke-width="3"/>
-    <circle r="80" fill="{p['bg']}" stroke="{p['grid']}" stroke-width="2"/>
-    <text y="-8" class="display" font-size="52" text-anchor="middle" fill="{p['ink']}">Y/A</text>
-    <text y="24" class="mono" font-size="11" font-weight="800" text-anchor="middle" fill="{p['muted']}">BUILD CORE</text>
-    <text y="47" class="mono" font-size="9" text-anchor="middle" fill="{p['verify']}">SYSTEMS / ML / PRODUCT</text>
-  </g>
-
-  <g transform="translate(177 145)">
-    <circle r="15" fill="{p['decision']}" stroke="{p['bg']}" stroke-width="5"/>
-    <rect x="-78" y="27" width="205" height="67" rx="12" fill="{p['panel']}"/>
-    <text x="-60" y="55" class="display" font-size="23" fill="{p['ink']}">TURNOUT LAB</text>
-    <text x="-60" y="78" class="mono" font-size="10" fill="{p['muted']}">ML INTEGRITY</text>
-  </g>
-  <g transform="translate(260 402)">
-    <circle r="15" fill="{p['signal']}" stroke="{p['bg']}" stroke-width="5"/>
-    <rect x="-70" y="-101" width="220" height="67" rx="12" fill="{p['panel']}"/>
-    <text x="-52" y="-73" class="display" font-size="23" fill="{p['ink']}">GLOBETROTTER</text>
-    <text x="-52" y="-50" class="mono" font-size="10" fill="{p['muted']}">PRODUCT SYSTEMS</text>
-  </g>
-  <g transform="translate(773 432)">
-    <circle r="15" fill="{p['signal2']}" stroke="{p['bg']}" stroke-width="5"/>
-    <rect x="-85" y="-103" width="190" height="67" rx="12" fill="{p['panel']}"/>
-    <text x="-67" y="-75" class="display" font-size="23" fill="{p['ink']}">PRISM IEMS</text>
-    <text x="-67" y="-52" class="mono" font-size="10" fill="{p['muted']}">AGENT WORKFLOWS</text>
-  </g>
-  <g transform="translate(1020 356)">
-    <circle r="15" fill="{p['verify']}" stroke="{p['bg']}" stroke-width="5"/>
-    <rect x="-195" y="29" width="243" height="67" rx="12" fill="{p['panel']}"/>
-    <text x="-177" y="57" class="display" font-size="23" fill="{p['ink']}">PHARMAGUARD / BEOS+</text>
-    <text x="-177" y="80" class="mono" font-size="10" fill="{p['muted']}">PUBLIC-IMPACT SYSTEMS</text>
-  </g>
-  <g transform="translate(954 139)">
-    <circle r="15" fill="{p['signal']}" stroke="{p['bg']}" stroke-width="5"/>
-    <rect x="-145" y="28" width="190" height="67" rx="12" fill="{p['panel']}"/>
-    <text x="-127" y="56" class="display" font-size="23" fill="{p['ink']}">F1 APEX</text>
-    <text x="-127" y="79" class="mono" font-size="10" fill="{p['muted']}">MOTORSPORT PRODUCT</text>
-  </g>
-"""
-    return shell(
-        "Build Circuit",
-        "A project circuit connecting Turnout Lab, GlobeTrotter, PRISM IEMS, PharmaGuard, BEOS Plus, and F1 Apex to different engineering boundaries.",
-        520,
-        p,
-        body,
-    )
-
-
-def channel(p: dict[str, str]) -> str:
-    body = f"""
-  <path d="M48 56H60V112H48" fill="none" stroke="{p['verify']}" stroke-width="7"/>
-  <text x="82" y="73" class="mono" font-size="14" font-weight="800" fill="{p['verify']}">OPEN CHANNEL / COLLABORATION</text>
-  <text x="82" y="137" class="display" font-size="44" fill="{p['ink']}">BRING THE AMBITIOUS IDEA.</text>
-  <text x="82" y="181" class="display" font-size="44" fill="{p['signal']}">I'LL BRING THE SYSTEM QUESTIONS.</text>
-  <path d="M82 218H1118" stroke="url(#signalFade)" stroke-width="5" stroke-linecap="round"/>
-  <text x="82" y="258" class="mono" font-size="12" font-weight="800" fill="{p['muted']}">EMAIL · LINKEDIN · GITHUB</text>
-  <text x="1118" y="258" class="mono" font-size="11" text-anchor="end" fill="{p['muted']}">OBSERVE → QUESTION → DECIDE → BUILD → VERIFY</text>
-"""
-    return shell(
-        "Open collaboration channel",
-        "Bring the ambitious idea. I will bring the system questions.",
-        300,
-        p,
-        body,
+        animated=True,
     )
 
 
 BUILDERS = {
     "hero": hero,
-    "operating-system": principles,
-    "turnout-trace": turnout,
-    "globetrotter-trace": globe,
-    "build-circuit": circuit,
-    "open-channel": channel,
+    "race-strategy": strategy,
+    "sector-turnout": sector_turnout,
+    "sector-globetrotter": sector_globe,
+    "paddock": paddock,
+    "pit-crew": pit_crew,
+    "team-radio": radio,
 }
 
 
 def main() -> None:
     ASSETS.mkdir(parents=True, exist_ok=True)
+    for generated in ASSETS.glob("*.svg"):
+        generated.unlink()
     for name, builder in BUILDERS.items():
-        for theme, palette in PALETTES.items():
-            destination = ASSETS / f"{name}-{theme}.svg"
-            destination.write_text(builder(palette), encoding="utf-8")
-            print(destination.relative_to(ROOT))
+        destination = ASSETS / f"{name}.svg"
+        destination.write_text(builder(), encoding="utf-8")
+        print(destination.relative_to(ROOT))
 
 
 if __name__ == "__main__":

@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import re
+import struct
 import sys
 import urllib.error
 import urllib.request
@@ -23,12 +24,19 @@ LOCAL_REFERENCE = re.compile(
 EXTERNAL_URL = re.compile(r"""https?://[^\s)>"']+""")
 
 REQUIRED_TEXT = (
-    "Featured traces",
-    "Turnout Lab",
-    "GlobeTrotter",
-    "Build circuit",
-    "Under the bodywork",
-    "I audit the assumption",
+    "lights out",
+    "i refuse to ship blind",
+    "the perfect score was a red flag",
+    "the demo does not break when the api does",
+    "turnout lab",
+    "globetrotter",
+    "f1 apex",
+    "prism iems",
+    "cosmic lens",
+    "pharmaguard",
+    "beos+",
+    "pit crew",
+    "team radio",
 )
 FORBIDDEN_PROVIDERS = (
     "github-readme-stats",
@@ -38,6 +46,22 @@ FORBIDDEN_PROVIDERS = (
     "platane/snk",
 )
 NETWORK_SKIP_HOSTS = {"linkedin.com", "www.linkedin.com", "in.linkedin.com"}
+EXPECTED_SVGS = {
+    "hero.svg",
+    "race-strategy.svg",
+    "sector-turnout.svg",
+    "sector-globetrotter.svg",
+    "paddock.svg",
+    "pit-crew.svg",
+    "team-radio.svg",
+}
+EXPECTED_SCREENSHOTS = {
+    "showcase/turnout-lab.png",
+    "showcase/globetrotter.png",
+    "showcase/f1-apex.png",
+    "showcase/prism-iems.png",
+    "showcase/cosmic-lens.png",
+}
 
 
 def fail(message: str) -> None:
@@ -97,11 +121,11 @@ def main() -> int:
 
     text = README.read_text(encoding="utf-8")
 
+    lowered = text.lower()
     for phrase in REQUIRED_TEXT:
-        if phrase not in text:
+        if phrase not in lowered:
             errors.append(f"required profile phrase is missing: {phrase!r}")
 
-    lowered = text.lower()
     for provider in FORBIDDEN_PROVIDERS:
         if provider in lowered:
             errors.append(f"template-style external widget is forbidden: {provider}")
@@ -125,35 +149,55 @@ def main() -> int:
                 continue
             if not root.tag.endswith("svg"):
                 errors.append(f"asset is not an SVG root: {path.relative_to(ROOT)}")
+            children = {child.tag.rsplit("}", 1)[-1] for child in root}
+            if not {"title", "desc"}.issubset(children):
+                errors.append(f"SVG lacks title/description: {path.relative_to(ROOT)}")
+        elif path.suffix.lower() == ".png" and path.exists():
+            with path.open("rb") as image_file:
+                header = image_file.read(24)
+            if len(header) < 24 or header[:8] != b"\x89PNG\r\n\x1a\n":
+                errors.append(f"invalid PNG header: {path.relative_to(ROOT)}")
+            else:
+                width, height = struct.unpack(">II", header[16:24])
+                if width < 1000 or height < 700:
+                    errors.append(
+                        f"showcase image is too small: {path.relative_to(ROOT)} "
+                        f"({width}x{height})"
+                    )
 
-    light_stems = {
-        path.name.removesuffix("-light.svg")
+    referenced_svgs = {
+        path.relative_to(ROOT / "assets").as_posix()
         for path in references
-        if path.name.endswith("-light.svg")
+        if path.suffix.lower() == ".svg"
     }
-    dark_stems = {
-        path.name.removesuffix("-dark.svg")
+    referenced_screenshots = {
+        path.relative_to(ROOT / "assets").as_posix()
         for path in references
-        if path.name.endswith("-dark.svg")
+        if path.suffix.lower() == ".png"
     }
-    if light_stems != dark_stems:
+    if referenced_svgs != EXPECTED_SVGS:
         errors.append(
-            "light/dark asset pairs do not match: "
-            f"light-only={sorted(light_stems - dark_stems)}, "
-            f"dark-only={sorted(dark_stems - light_stems)}"
+            "SVG set differs from the designed system: "
+            f"missing={sorted(EXPECTED_SVGS - referenced_svgs)}, "
+            f"unexpected={sorted(referenced_svgs - EXPECTED_SVGS)}"
+        )
+    if referenced_screenshots != EXPECTED_SCREENSHOTS:
+        errors.append(
+            "showcase screenshot set differs from the designed system: "
+            f"missing={sorted(EXPECTED_SCREENSHOTS - referenced_screenshots)}, "
+            f"unexpected={sorted(referenced_screenshots - EXPECTED_SCREENSHOTS)}"
         )
 
-    pictures = text.count("<picture>")
     alt_matches = re.finditer(
         r"""<img\b[^>]*\balt=(?P<quote>["'])(?P<alt>.*?)(?P=quote)""",
         text,
         re.IGNORECASE,
     )
     alt_texts = [match.group("alt") for match in alt_matches]
-    if pictures < 6:
-        errors.append(f"expected at least 6 visual panels, found {pictures}")
-    if len(alt_texts) != pictures or any(len(alt.strip()) < 20 for alt in alt_texts):
-        errors.append("every visual panel must have meaningful alternative text")
+    if len(alt_texts) < 12:
+        errors.append(f"expected at least 12 accessible images, found {len(alt_texts)}")
+    if any(len(alt.strip()) < 30 for alt in alt_texts):
+        errors.append("every visual must have meaningful alternative text")
 
     urls = sorted({url.rstrip(".,") for url in EXTERNAL_URL.findall(text)})
     if len(urls) < 10:

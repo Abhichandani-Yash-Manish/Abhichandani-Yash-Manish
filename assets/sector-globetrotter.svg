@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="292" viewBox="0 0 1200 292" role="img" aria-labelledby="title desc">
+  <title id="title">Sector 02 — GlobeTrotter</title>
+  <desc id="desc">The demo does not break when the API does. GlobeTrotter provides 55 destination dossiers, 390 activities, three navigation languages, and no required paid API keys.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#03050A"/>
+      <stop offset=".58" stop-color="#07101B"/>
+      <stop offset="1" stop-color="#17070C"/>
+    </linearGradient>
+    <linearGradient id="signal" x1="0" x2="1">
+      <stop offset="0" stop-color="#FF254A"/>
+      <stop offset=".48" stop-color="#9A6CFF"/>
+      <stop offset="1" stop-color="#00E5FF"/>
+    </linearGradient>
+    <pattern id="grid" width="38" height="38" patternUnits="userSpaceOnUse">
+      <path d="M38 0H0V38" fill="none" stroke="#122235" stroke-width="1"/>
+    </pattern>
+    <pattern id="checks" width="24" height="24" patternUnits="userSpaceOnUse">
+      <rect width="12" height="12" fill="#F8FBFF"/><rect x="12" y="12" width="12" height="12" fill="#F8FBFF"/>
+    </pattern>
+    <filter id="redGlow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="7" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="cyanGlow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <style>
+      .display { font-family: "Arial Narrow", "Avenir Next Condensed", Impact, sans-serif; font-weight: 900; font-stretch: condensed; letter-spacing: -1.4px; }
+      .body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: 1.25px; }
+      
+    </style>
+  </defs>
+  <rect width="1200" height="292" rx="28" fill="url(#bg)"/>
+  <rect x="1" y="1" width="1198" height="290" rx="27" fill="none" stroke="#1D3045" stroke-width="2"/>
+  <rect x="20" y="20" width="1160" height="252" rx="18" fill="url(#grid)" opacity=".72"/>
+  
+  <text x="48" y="50" class="mono" font-size="12" font-weight="850" fill="#00E5FF">SECTOR 02 / PRODUCT RESILIENCE</text>
+  <text x="48" y="108" class="display" font-size="43" fill="#F8FBFF">THE DEMO DOESN'T BREAK WHEN <tspan fill="#00E5FF">THE API DOES.</tspan></text>
+  <text x="48" y="144" class="body" font-size="16" fill="#8494A8">GlobeTrotter keeps the planning journey alive with durable data, keyless maps, and deliberate fallbacks.</text>
+  <g transform="translate(48 178)">
+    <rect width="220" height="74" rx="12" fill="#101F31" stroke="#1D3045"/>
+    <text x="18" y="30" class="display" font-size="28" fill="#00E5FF">55</text><text x="18" y="54" class="mono" font-size="9" fill="#8494A8">DESTINATION DOSSIERS</text>
+    <rect x="236" width="220" height="74" rx="12" fill="#101F31" stroke="#1D3045"/>
+    <text x="254" y="30" class="display" font-size="28" fill="#9A6CFF">390</text><text x="254" y="54" class="mono" font-size="9" fill="#8494A8">CURATED ACTIVITIES</text>
+    <rect x="472" width="180" height="74" rx="12" fill="#101F31" stroke="#1D3045"/>
+    <text x="490" y="30" class="display" font-size="28" fill="#FFC857">3</text><text x="490" y="54" class="mono" font-size="9" fill="#8494A8">NAV LANGUAGES</text>
+    <rect x="668" width="420" height="74" rx="12" fill="#101F31" stroke="#1D3045"/>
+    <text x="686" y="30" class="display" font-size="25" fill="#26E6A4">ZERO REQUIRED PAID KEYS</text><text x="686" y="54" class="mono" font-size="9" fill="#8494A8">CORE JOURNEY REMAINS DEMONSTRABLE</text>
+  </g>
+
+</svg>
