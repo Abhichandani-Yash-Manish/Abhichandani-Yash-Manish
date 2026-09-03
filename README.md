@@ -76,14 +76,14 @@ Role-aware collaboration, invitation tokens, transactional trip copying, budget 
       <a href="https://apexpredict.live"><img src="./assets/showcase/f1-apex.png" width="100%" alt="F1 Apex telemetry command center with race-session status, prediction controls, next-race countdown, and a dark red motorsport interface." /></a>
       <br><br>
       <strong>F1 APEX // race weekend, engineered</strong><br>
-      <sub>Predictions, leagues, standings, rivalries, scoring, and telemetry-oriented interaction—wrapped in the product language that made me want to build it.</sub><br><br>
+      <sub>Predictions · leagues · scoring · telemetry</sub><br><br>
       <a href="https://apexpredict.live"><strong>LIVE TELEMETRY →</strong></a> · <a href="https://github.com/Abhichandani-Yash-Manish/F1-Prefictor-Vibe_Project">SOURCE</a>
     </td>
     <td width="50%" valign="top">
       <a href="https://prism-iems.vercel.app"><img src="./assets/showcase/prism-iems.png" width="100%" alt="PRISM IEMS institutional war room displaying intervention risks, escalation metrics, and operational decision cards." /></a>
       <br><br>
       <strong>PRISM IEMS // institution ops with guardrails</strong><br>
-      <sub>A role-based institutional system exploring observable agent workflows, intervention queues, approval boundaries, and evidence-aware operations.</sub><br><br>
+      <sub>Roles · agents · approvals · intervention queues</sub><br><br>
       <a href="https://prism-iems.vercel.app"><strong>OPEN WAR ROOM →</strong></a> · <a href="https://github.com/Abhichandani-Yash-Manish/prism-iems">SOURCE</a>
     </td>
   </tr>
@@ -92,23 +92,21 @@ Role-aware collaboration, invitation tokens, transactional trip copying, budget 
       <a href="https://cosmiclens-iota.vercel.app"><img src="./assets/showcase/cosmic-lens.png" width="100%" alt="Cosmic Lens astronomy platform landing page with a star field and navigation for archives, data analysis, infographics, timeline, and community." /></a>
       <br><br>
       <strong>COSMIC LENS // signal in the early universe</strong><br>
-      <sub>A team-built astronomy experience for archiving, analysing, visualising, and discussing high-redshift observations.</sub><br><br>
+      <sub>Archive · analysis · visualization · community</sub><br><br>
       <a href="https://cosmiclens-iota.vercel.app"><strong>START EXPLORING →</strong></a> · <a href="https://github.com/Abhichandani-Yash-Manish/Cosmic-Lens-by-Team-Void_Pointers">SOURCE</a>
     </td>
     <td width="50%" valign="top">
       <br>
-      <code>PUBLIC IMPACT / DOUBLE HEADER</code>
-      <h3>PharmaGuard</h3>
-      <p>Pharmacy inventory workflows around FEFO dispatch, expiry visibility, alerts, and demand forecasting.</p>
-      <a href="https://github.com/Abhichandani-Yash-Manish/Void-Pointers-Aetrix-2026-"><strong>INSPECT PHARMAGUARD →</strong></a>
+      <strong>PUBLIC IMPACT // double header</strong><br><br>
+      <sub><strong>PharmaGuard</strong><br>FEFO · expiry alerts · demand forecasts</sub><br>
+      <a href="https://github.com/Abhichandani-Yash-Manish/Void-Pointers-Aetrix-2026-"><strong>INSPECT →</strong></a>
       <br><br>
-      <h3>BEOS+</h3>
-      <p>A blood-emergency coordination prototype spanning hospital inventory, live emergency mapping, and donor-alert workflows.</p>
-      <a href="https://beos-plus.vercel.app"><strong>OPEN BEOS+ →</strong></a> · <a href="https://github.com/Abhichandani-Yash-Manish/BEOS_PLUS">SOURCE</a>
+      <sub><strong>BEOS+</strong><br>Inventory · emergency maps · donor alerts</sub><br>
+      <a href="https://beos-plus.vercel.app"><strong>LAUNCH →</strong></a> · <a href="https://github.com/Abhichandani-Yash-Manish/BEOS_PLUS">SOURCE</a>
       <br><br>
-      <code>IN THE GARAGE</code>
-      <p><a href="https://github.com/Abhichandani-Yash-Manish/apex-simulate"><strong>APEX SIMULATE</strong></a> — strategy-simulation and telemetry-lake experiments.</p>
-      <p><a href="https://github.com/Abhichandani-Yash-Manish/ClubAtlas"><strong>CLUBATLAS</strong></a> — a grounded campus-club assistant with safe action boundaries.</p>
+      <strong>IN THE GARAGE</strong><br>
+      <sub><a href="https://github.com/Abhichandani-Yash-Manish/apex-simulate"><strong>APEX SIMULATE</strong></a> // strategy + telemetry<br>
+      <a href="https://github.com/Abhichandani-Yash-Manish/ClubAtlas"><strong>CLUBATLAS</strong></a> // grounded actions</sub>
     </td>
   </tr>
 </table>
