@@ -1,0 +1,40 @@
+name: Profile
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: "0 6 * * 1"   # Monday link-rot sweep
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  integrity:
+    # Structure only: never fails because someone else's host had a bad minute.
+    if: github.event_name != 'schedule'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Hero is reproducible from its generator
+        run: |
+          python3 scripts/hero.py
+          git diff --exit-code -- assets/hero.svg
+      - name: Assets, widget hosts, media budget
+        run: python3 scripts/check.py
+
+  links:
+    # Link rot is real but not a reason to block a commit, so it runs weekly.
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python3 scripts/check.py --network
